@@ -45,14 +45,14 @@ public Autonomous(DriveTrain driveTrain, Lidar lidar, Indexer indexer, ShooterPI
 
     addCommands(
       new ShooterToggleCommand(shooter),
-      new LidarAutoAlign(driveTrain, lidar, move, turn),
+      //new LidarAutoAlign(driveTrain, lidar, move, turn),
       new WaitCommand(3),
       new FireCommand(indexer, shooter, intake),
       new WaitCommand(2),
       
       new ShooterStopCommand(shooter),
-      new DriveCommand(driveTrain, () -> -Math.abs(0.4), () -> Math.abs(0.0), () -> Math.abs(0.8)),
-      new WaitCommand(3),
+      new DriveCommand(driveTrain, () -> -Math.abs(0.6), () -> Math.abs(0.0), () -> Math.abs(0.8)),
+      new WaitCommand(2),
       new DriveCommand(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
 
     );

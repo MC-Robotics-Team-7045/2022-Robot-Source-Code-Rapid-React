@@ -109,7 +109,7 @@ public final class Constants {
 
 // LIDAR Settings
     public static final double LidarOffset = 8;        //CM?
-    public static final double LidarSetDistance = 6.5; //feet
+    public static final double LidarSetDistance = 4.3; //feet
     public static final double LidarSetTolerance = 0.25; //feet
     public static final double kLidarMoveMinThreshold = 0.4;
 
@@ -119,8 +119,8 @@ public final class Constants {
 
  //Climber Motor Settings   
     public static final double kClimberSpeed = 0.60; //PWM Speed of Climber Motor
-    public static final double kClimberHoldTIme = 10.0; //Seconds to engage hold routine (small amount to climber PWM)
-    public static final double kClimberHoldSpeed = 0.10; //PWM Speed during "hold" period
+    public static final double kClimberHoldTIme = 15.0; //Seconds to engage hold routine (small amount to climber PWM)
+    public static final double kClimberHoldSpeed = 0.15; //PWM Speed during "hold" period
     public static final double kClimberRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
     public static final double kClimberExtendedVoltage = 2; // Set point for Climber POT when extended
 
