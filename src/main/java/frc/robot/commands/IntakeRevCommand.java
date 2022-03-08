@@ -14,7 +14,7 @@ import frc.robot.subsystems.Intake;
 public class IntakeRevCommand extends CommandBase {
   private final Intake m_Intake;
 
-   // Creates a new IntakeFwdCommand.
+  // Creates a new IntakeFwdCommand.
 
   public IntakeRevCommand(Intake intake) {
     super();
@@ -33,15 +33,14 @@ public class IntakeRevCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Intake.isRunning()){
+    if (m_Intake.isRunning()) {
       m_Intake.stop();
-      if (Constants.kDebug){
-         System.out.println("REV Intake CMD - Exec - stop");
+      if (Constants.kDebug) {
+        System.out.println("REV Intake CMD - Exec - stop");
       }
-    }
-    else{
+    } else {
       m_Intake.reverse();
-      if (Constants.kDebug){
+      if (Constants.kDebug) {
         System.out.println("REV Intake CMD - Exec - start");
       }
     }
@@ -50,7 +49,7 @@ public class IntakeRevCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println("RIntake-Exec-END");
+    // System.out.println("RIntake-Exec-END");
   }
 
   // Returns true when the command should end.

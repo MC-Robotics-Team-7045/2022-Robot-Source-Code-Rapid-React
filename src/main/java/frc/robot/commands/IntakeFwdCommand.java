@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.Intake;
 
-
 public class IntakeFwdCommand extends CommandBase {
   private final Intake m_Intake;
 
-   // Creates a new IntakeFwdCommand.
+  // Creates a new IntakeFwdCommand.
 
   public IntakeFwdCommand(Intake intake) {
     super();
@@ -29,32 +28,30 @@ public class IntakeFwdCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //System.out.println("FIntake-Init");
+    // System.out.println("FIntake-Init");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-
-    if (m_Intake.isRunning()){
+    if (m_Intake.isRunning()) {
       m_Intake.stop();
-      if (Constants.kDebug){
-         System.out.println("FWD Intake CMD - Exec-stop");
+      if (Constants.kDebug) {
+        System.out.println("FWD Intake CMD - Exec-stop");
+      }
+    } else {
+      m_Intake.start();
+      if (Constants.kDebug) {
+        System.out.println("FWD Intake CMD - Exec - start");
       }
     }
-    else{
-      m_Intake.start();
-      if (Constants.kDebug){
-         System.out.println("FWD Intake CMD - Exec - start");
-      }
-      }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println("FIntake-Exec-END");
+    // System.out.println("FIntake-Exec-END");
   }
 
   // Returns true when the command should end. True to run once.

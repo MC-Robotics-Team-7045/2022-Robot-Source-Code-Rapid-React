@@ -12,14 +12,12 @@ import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
 
-
 public class ClimberRetractCommand extends CommandBase {
   private final ClimberSubsystem m_Climber;
   private double timeStamp;
   private boolean holdStage = false;
-  
 
-   // Creates a new Climber Retract Command.
+  // Creates a new Climber Retract Command.
 
   public ClimberRetractCommand(ClimberSubsystem climbervar) {
     super();
@@ -32,7 +30,7 @@ public class ClimberRetractCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //System.out.println("FClimber-Init");
+    // System.out.println("FClimber-Init");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,33 +39,32 @@ public class ClimberRetractCommand extends CommandBase {
 
     if (holdStage) {
       m_Climber.hold();
-    }
-    else {
+    } else {
       m_Climber.down();
     }
 
-    if (Constants.kDebug){
+    if (Constants.kDebug) {
       System.out.print("Climber retracting - ");
-      System.out.format("%.2f",m_Climber.climberPot.getVoltage());
-      if (holdStage){
+      System.out.format("%.2f", m_Climber.climberPot.getVoltage());
+      if (holdStage) {
         System.out.print(" HOLD time: ");
-        System.out.format("%.2f",Timer.getFPGATimestamp() - timeStamp);
+        System.out.format("%.2f", Timer.getFPGATimestamp() - timeStamp);
 
       }
       System.out.println("");
     }
 
-   /*
-   //TOGGLE FUNCTION WITH NO LIMITS
-    if (m_Climber.isRunning()){
-      m_Climber.stop();
-
-
-    }
-    else{
-      m_Climber.down();
-    }
-  */
+    /*
+     * //TOGGLE FUNCTION WITH NO LIMITS
+     * if (m_Climber.isRunning()){
+     * m_Climber.stop();
+     * 
+     * 
+     * }
+     * else{
+     * m_Climber.down();
+     * }
+     */
 
   }
 
@@ -75,48 +72,47 @@ public class ClimberRetractCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_Climber.stop();
-    holdStage = false; //reset Hold stage
+    holdStage = false; // reset Hold stage
 
-    //System.out.println("FClimber-Exec-END");
+    // System.out.println("FClimber-Exec-END");
   }
 
   // Returns true when the command should end. True to run once.
   /*
- * Hall Effect Sensor - NOT WORKING. Switched to linear string potentiometer
- * Sensor is driven low in the presence of a magnetic field, and high impedance
- * when there is no magnet present
- * Use this as a limit switch.
- */
+   * Hall Effect Sensor - NOT WORKING. Switched to linear string potentiometer
+   * Sensor is driven low in the presence of a magnetic field, and high impedance
+   * when there is no magnet present
+   * Use this as a limit switch.
+   */
   @Override
   public boolean isFinished() {
 
-        // Voltage increases as string retracts. 0" is approx 4.8V. Full extension < 1V
-    if (!holdStage && m_Climber.climberVoltage() > Constants.kClimberRetractedVoltage){ //limit reached arm fully retracted.
-      
+    // Voltage increases as string retracts. 0" is approx 4.8V. Full extension < 1V
+    if (!holdStage && m_Climber.climberVoltage() > Constants.kClimberRetractedVoltage) { // limit reached arm fully
+                                                                                         // retracted.
+
       holdStage = true;
-      //if (holdStage && !prevStage){
-        timeStamp = Timer.getFPGATimestamp();
-      //}
-      //prevStage=holdStage;  
+      // if (holdStage && !prevStage){
+      timeStamp = Timer.getFPGATimestamp();
+      // }
+      // prevStage=holdStage;
 
-
-      if (Constants.kDebug){
+      if (Constants.kDebug) {
         System.out.print("Climber retracting - ");
-        System.out.format("%.2f",m_Climber.climberPot.getVoltage());
+        System.out.format("%.2f", m_Climber.climberPot.getVoltage());
         System.out.println(" - LIMIT REACHED!");
       }
     }
-    if (holdStage && (Timer.getFPGATimestamp() - timeStamp > Constants.kClimberHoldTIme)){
+    if (holdStage && (Timer.getFPGATimestamp() - timeStamp > Constants.kClimberHoldTIme)) {
       System.out.println("End of HOLD Stage");
-      return true;  // End hold routine after HoldTime expired
-    }
-    else{
-//      if (Constants.kDebug){
-//       System.out.print("Hold Time - ");
-//        System.out.format("%.2f",Timer.getFPGATimestamp() - timeStamp);
-//        System.out.println("");
-//      }
-      return false;  //keep running
+      return true; // End hold routine after HoldTime expired
+    } else {
+      // if (Constants.kDebug){
+      // System.out.print("Hold Time - ");
+      // System.out.format("%.2f",Timer.getFPGATimestamp() - timeStamp);
+      // System.out.println("");
+      // }
+      return false; // keep running
     }
   }
 }

@@ -16,15 +16,15 @@ import frc.robot.subsystems.Indexer;
 
 public class AdjustBallCountCommand extends CommandBase {
 
-  //private final Indexer m_indexer;
+  // private final Indexer m_indexer;
 
   /**
    * Creates a new LoadMagazineCommand.
    */
-  public AdjustBallCountCommand( final Indexer indexer) {
+  public AdjustBallCountCommand(final Indexer indexer) {
     super();
- 
-    //m_indexer = indexer;
+
+    // m_indexer = indexer;
     // Use addRequirements() here to declare subsystem dependencies.
 
     addRequirements(indexer);
@@ -35,26 +35,24 @@ public class AdjustBallCountCommand extends CommandBase {
   @Override
   public void initialize() {
 
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-      //falling edge detected
-      Indexer.balls = Indexer.balls - 1;
+    // falling edge detected
+    Indexer.balls = Indexer.balls - 1;
 
-      if (Indexer.balls == -1){
-        Indexer.balls = Constants.kMaxMagazineBalls;
-      }
+    if (Indexer.balls == -1) {
+      Indexer.balls = Constants.kMaxMagazineBalls;
+    }
 
-      if (Constants.kDebug) {
-        System.out.print("OVERRIDE Ball count  - Balls=");
-        System.out.println(Indexer.balls);
-      }  
+    if (Constants.kDebug) {
+      System.out.print("OVERRIDE Ball count  - Balls=");
+      System.out.println(Indexer.balls);
+    }
 
-   
   }
 
   // Called once the command ends or is interrupted.
@@ -67,7 +65,7 @@ public class AdjustBallCountCommand extends CommandBase {
   @Override
   public boolean isFinished() {
 
-      return true;
+    return true;
 
   }
 }

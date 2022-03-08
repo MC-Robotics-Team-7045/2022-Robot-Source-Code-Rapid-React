@@ -20,10 +20,11 @@ public class DriveCommand extends CommandBase {
   private final DoubleSupplier m_move;
   private final DoubleSupplier m_turn;
   private final DoubleSupplier m_throttle;
+
   /**
    * Creates a new DriveCommand.
    */
-  public DriveCommand(DriveTrain driveTrain, DoubleSupplier move, DoubleSupplier turn, DoubleSupplier throttle){
+  public DriveCommand(DriveTrain driveTrain, DoubleSupplier move, DoubleSupplier turn, DoubleSupplier throttle) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_move = move;
     m_turn = turn;
@@ -40,7 +41,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.manualDrive(m_move.getAsDouble(), m_turn.getAsDouble(),m_throttle.getAsDouble());
+    m_driveTrain.manualDrive(m_move.getAsDouble(), m_turn.getAsDouble(), m_throttle.getAsDouble());
 
   }
 
@@ -49,7 +50,8 @@ public class DriveCommand extends CommandBase {
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end. False will continue to get scheduled and run.
+  // Returns true when the command should end. False will continue to get
+  // scheduled and run.
   @Override
   public boolean isFinished() {
     return false;

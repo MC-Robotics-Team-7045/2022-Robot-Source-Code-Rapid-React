@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-
-
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
@@ -16,6 +14,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 /**
@@ -23,44 +22,58 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
  */
 public class ShooterPID extends PIDSubsystem {
   private final PWMVictorSPX shooterMotor = new PWMVictorSPX(Constants.MOTOR_SHOOTER_PORT);
-  private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A, Constants.SHOOTER_ENCODER_DIO_PORT_B);
-  private final SimpleMotorFeedforward shooterFeedforward = new SimpleMotorFeedforward(Constants.kSVolts, Constants.kVVoltSecondsPerRotation);
-  
+  private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A,
+      Constants.SHOOTER_ENCODER_DIO_PORT_B);
+  private final SimpleMotorFeedforward shooterFeedforward = new SimpleMotorFeedforward(Constants.kSVolts,
+      Constants.kVVoltSecondsPerRotation);
+
   public static double overrideShooterSpeed = Constants.kShooterSpeed;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public ShooterPID(){
-    //super();
+  public ShooterPID() {
+    // super();
     super(new PIDController(Constants.kShooter_P, Constants.kShooter_I, Constants.kShooter_D));
     getController().setTolerance(Constants.kShooterToleranceRPS);
     shooterEncoder.setDistancePerPulse(Constants.kShooterEncoderDistancePerPulse);
     setSetpoint(Constants.kShooterTargetRPS);
 
-    //LiveWindow
+    // LiveWindow
     Shuffleboard.selectTab("Shooter");
-    Shuffleboard.getTab("Shooter").add("Shooter Motor", shooterMotor)
-        .withPosition(1,0);
+    Shuffleboard.getTab("Shooter").add("Shooter Motor2", shooterMotor)
+        .withPosition(1, 0);
     Shuffleboard.getTab("Shooter").add("Shooter Encoder", shooterEncoder)
-        .withPosition(3,0);
+        .withPosition(3, 0);
     Shuffleboard.getTab("Shooter").add("Controller", m_controller)
-        .withPosition(1,3);
-//    Shuffleboard.getTab("Shooter").add("FeedFordward", shooterFeedforward)
-//        .withPosition(4,3);
+        .withPosition(1, 3);
+    // Shuffleboard.getTab("Shooter").add("FeedFordward", shooterFeedforward)
+    // .withPosition(4,3);
   }
 
-   //Start the intake motor //TEST
-   public void start() {
-    //shooterMotor.set(1);
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+
+    SmartDashboard.putData("Shooter Motor", shooterMotor);
+    SmartDashboard.putNumber("Shooter Setpoint", overrideShooterSpeed);
+    SmartDashboard.putBoolean("Shooter Ready", m_controller.atSetpoint());
   }
+
+  // Start the intake motor //TEST
+  public void start() {
+    // shooterMotor.set(1);
+  }
+
   @Override
   public void useOutput(double output, double setpoint) {
     shooterMotor.setVoltage(output + shooterFeedforward.calculate(setpoint));
 
-    System.out.printf("Output: %.3f   newset: %.3f     getRate: %.2f    AtSet: %b", output, output + shooterFeedforward.calculate(setpoint), shooterEncoder.getRate(), m_controller.atSetpoint());
+    System.out.printf("Output: %.3f   newset: %.3f     getRate: %.2f    AtSet: %b", output,
+        output + shooterFeedforward.calculate(setpoint), shooterEncoder.getRate(), m_controller.atSetpoint());
     System.out.println();
 
   }
+
   @Override
   public double getMeasurement() {
 
@@ -69,12 +82,10 @@ public class ShooterPID extends PIDSubsystem {
 
   public boolean atSetpoint() {
 
-
     return m_controller.atSetpoint();
   }
 
-
- // Stops the Shooter motor
+  // Stops the Shooter motor
 
   public void stop() {
     shooterMotor.set(0);
@@ -85,14 +96,10 @@ public class ShooterPID extends PIDSubsystem {
    */
   public boolean isRunning() {
 
-    if (Math.abs(shooterMotor.get()) > 0.0){
+    if (Math.abs(shooterMotor.get()) > 0.0) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 }
-
-
-

@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 //import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -22,28 +23,34 @@ public class Intake extends SubsystemBase {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public Intake(){
+  public Intake() {
     super();
 
-    //LiveWindow
-    //addChild("Intake Motor", intakeMotor);
-    Shuffleboard.selectTab("Shooter");
-    Shuffleboard.getTab("Shooter").add("Intake Motor", intakeMotor)
-        .withPosition(1,2);
+    // LiveWindow
+    // addChild("Intake Motor", intakeMotor);
+    if (Constants.kDebug) {
+      Shuffleboard.selectTab("Shooter");
+      Shuffleboard.getTab("Shooter").add("Intake Motor", intakeMotor)
+          .withPosition(1, 2);
+    }
   }
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
 
-  //Start the intake motor
+    SmartDashboard.putData("Intake Motor", intakeMotor);
+  }
+  // Start the intake motor
   public void start() {
     intakeMotor.set(Constants.kIntakeSpeed);
   }
 
- //Reverse the intake motor
+  // Reverse the intake motor
   public void reverse() {
     intakeMotor.set(-Constants.kIntakeSpeed);
   }
 
-
- // Stops the intake motor
+  // Stops the intake motor
 
   public void stop() {
     intakeMotor.set(0);
@@ -52,14 +59,10 @@ public class Intake extends SubsystemBase {
 
   public boolean isRunning() {
     double speed = intakeMotor.get();
-    if (Math.abs(speed)> 0){
+    if (Math.abs(speed) > 0) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 }
-
-
-

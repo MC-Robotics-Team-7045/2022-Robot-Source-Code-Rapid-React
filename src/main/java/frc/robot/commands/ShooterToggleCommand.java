@@ -10,18 +10,18 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterPID;
+
 //import frc.robot.subsystems.Shooter;
 //Toggle SHooter Motor ON or OFF
 public class ShooterToggleCommand extends CommandBase {
   private final ShooterPID m_shooter;
-  //private final Shooter m_shooter;
+  // private final Shooter m_shooter;
 
-
-   // Creates a new ShooterCommand.
+  // Creates a new ShooterCommand.
 
   public ShooterToggleCommand(ShooterPID shooter) {
-  //public ShooterToggleCommand(Shooter shooter) {
-      super();
+    // public ShooterToggleCommand(Shooter shooter) {
+    super();
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
@@ -30,27 +30,25 @@ public class ShooterToggleCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //System.out.println("FIntake-Init");
+    // System.out.println("FIntake-Init");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.isRunning()){
+    if (m_shooter.isRunning()) {
       m_shooter.disable();
 
-      if (Constants.kDebug){
+      if (Constants.kDebug) {
         System.out.println("Shooter Toggle CMD - Exec - stop");
-     }
-      
+      }
 
-    }
-    else{
+    } else {
       m_shooter.enable();
 
-      if (Constants.kDebug){
+      if (Constants.kDebug) {
         System.out.println("Shooter Toggle  CMD - Exec - start");
-     }
+      }
 
     }
   }
@@ -58,7 +56,7 @@ public class ShooterToggleCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println("FIntake-Exec-END");
+    // System.out.println("FIntake-Exec-END");
   }
 
   // Returns true when the command should end. True to run once.

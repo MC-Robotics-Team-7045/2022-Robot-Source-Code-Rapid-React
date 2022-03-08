@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.Compressor;
 
-
 public class CylinderRetractCommand extends CommandBase {
   private final Compressor m_cylinder;
 
-   // Creates a new IntakeFwdCommand.
+  // Creates a new IntakeFwdCommand.
 
   public CylinderRetractCommand(Compressor cylinder) {
     super();
@@ -28,7 +27,7 @@ public class CylinderRetractCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //System.out.println("FIntake-Init");
+    // System.out.println("FIntake-Init");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,7 +41,7 @@ public class CylinderRetractCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println("FIntake-Exec-END");
+    // System.out.println("FIntake-Exec-END");
   }
 
   // Returns true when the command should end. True to run once.

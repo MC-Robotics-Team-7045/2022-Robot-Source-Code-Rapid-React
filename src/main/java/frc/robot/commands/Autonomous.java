@@ -22,38 +22,41 @@ import frc.robot.subsystems.Intake;
 //import frc.robot.commands.LimelightAutoAlign;
 //import frc.robot.commands.ShooterToggleCommand;
 
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Autonomous extends SequentialCommandGroup {
-    final DoubleSupplier move = () -> Math.abs(0.0);
-    final DoubleSupplier turn = () -> Math.abs(0.6);
+  final DoubleSupplier move = () -> Math.abs(0.0);
+  final DoubleSupplier turn = () -> Math.abs(0.6);
+
   /**
    * Creates a new Autonomous.
    */
-//  public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer indexer, ShooterPID shooter, Intake intake) {
-public Autonomous(DriveTrain driveTrain, Lidar lidar, Indexer indexer, ShooterPID shooter, Intake intake) {
-      //public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer indexer, Shooter shooter, Intake intake) {
-      // Add your commands in the super() call, e.g.
+  // public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer
+  // indexer, ShooterPID shooter, Intake intake) {
+  public Autonomous(DriveTrain driveTrain, Lidar lidar, Indexer indexer, ShooterPID shooter, Intake intake) {
+    // public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer
+    // indexer, Shooter shooter, Intake intake) {
+    // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    //super();
-    //final DoubleSupplier move = () -> Math.abs(0.0);
-    //final DoubleSupplier turn = () -> Math.abs(0.6);
+    // super();
+    // final DoubleSupplier move = () -> Math.abs(0.0);
+    // final DoubleSupplier turn = () -> Math.abs(0.6);
 
-    //super (new FireCommand(indexer, shooter), new FireCommand(indexer, shooter), new FireCommand(indexer, shooter));
+    // super (new FireCommand(indexer, shooter), new FireCommand(indexer, shooter),
+    // new FireCommand(indexer, shooter));
 
     addCommands(
-      new ShooterToggleCommand(shooter),
-      //new LidarAutoAlign(driveTrain, lidar, move, turn),
-      new WaitCommand(3),
-      new FireCommand(indexer, shooter, intake),
-      new WaitCommand(2),
-      
-      new ShooterStopCommand(shooter),
-      new DriveCommand(driveTrain, () -> -Math.abs(0.6), () -> Math.abs(0.0), () -> Math.abs(0.8)),
-      new WaitCommand(2),
-      new DriveCommand(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
+        new ShooterToggleCommand(shooter),
+        // new LidarAutoAlign(driveTrain, lidar, move, turn),
+        new WaitCommand(3),
+        new FireCommand(indexer, shooter, intake),
+        new WaitCommand(2),
+
+        new ShooterStopCommand(shooter),
+        new DriveCommand(driveTrain, () -> -Math.abs(0.6), () -> Math.abs(0.0), () -> Math.abs(0.8)),
+        new WaitCommand(2),
+        new DriveCommand(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
 
     );
   }
