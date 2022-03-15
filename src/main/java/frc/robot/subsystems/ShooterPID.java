@@ -53,7 +53,7 @@ public class ShooterPID extends PIDSubsystem {
 
     shooterMotor.configFactoryDefault();
     shooterMotor.setInverted(false);
-    shooterMotor.setNeutralMode(NeutralMode.Brake);
+    shooterMotor.setNeutralMode(NeutralMode.Coast);
 
   }
   @Override

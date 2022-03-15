@@ -43,7 +43,7 @@ public class Shooter extends SubsystemBase {
 
     shooterMotor.configFactoryDefault();
     shooterMotor.setInverted(false);
-    shooterMotor.setNeutralMode(NeutralMode.Brake);
+    shooterMotor.setNeutralMode(NeutralMode.Coast);
 
   }
    //Start the intake motor //TEST
