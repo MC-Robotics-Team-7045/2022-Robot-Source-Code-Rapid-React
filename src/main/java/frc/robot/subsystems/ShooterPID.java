@@ -8,20 +8,20 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
  */
 public class ShooterPID extends PIDSubsystem {
-  private final PWMVictorSPX shooterMotor = new PWMVictorSPX(Constants.MOTOR_SHOOTER_PORT);
+  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_SHOOTER_PORT);
   private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A,
       Constants.SHOOTER_ENCODER_DIO_PORT_B);
   private final SimpleMotorFeedforward shooterFeedforward = new SimpleMotorFeedforward(Constants.kSVolts,
@@ -49,7 +49,13 @@ public class ShooterPID extends PIDSubsystem {
     // Shuffleboard.getTab("Shooter").add("FeedFordward", shooterFeedforward)
     // .withPosition(4,3);
   }
+  public void init() {
 
+    shooterMotor.configFactoryDefault();
+    shooterMotor.setInverted(false);
+    shooterMotor.setNeutralMode(NeutralMode.Brake);
+
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -9,20 +9,18 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-//import frc.robot.commands.IndexerCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-//import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.DigitalInput;
-//import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
  */
 public class Indexer extends SubsystemBase {
-  private final PWMVictorSPX indexerMotor = new PWMVictorSPX(Constants.MOTOR_INDEXER_PORT);
+  private final WPI_VictorSPX indexerMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_INDEXER_PORT);
 
   // Light Beam Switches are TRUE when no ball is present
   public DigitalInput swShooter = new DigitalInput(Constants.SWITCH_S1_SHOOTER_DIO_PORT);
@@ -32,7 +30,7 @@ public class Indexer extends SubsystemBase {
   public DigitalInput swIntake = new DigitalInput(Constants.SWITCH_S4_INTAKE_DIO_PORT);
 
   public static int balls = Constants.kInitMagazineBalls;
-  
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Indexer() {
@@ -50,6 +48,11 @@ public class Indexer extends SubsystemBase {
   }
 
   public void init() {
+
+    indexerMotor.configFactoryDefault();
+    indexerMotor.setInverted(false);
+    indexerMotor.setNeutralMode(NeutralMode.Brake);
+
     SmartDashboard.putNumber("Ball Count", balls);
     SmartDashboard.putBoolean("SW-SHOOTER", swShooter.get());
     SmartDashboard.putBoolean("SW-MidINDEX", swMidIndex.get());

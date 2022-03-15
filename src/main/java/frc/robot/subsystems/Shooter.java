@@ -10,16 +10,17 @@ package frc.robot.subsystems;
 
 
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
  */
 public class Shooter extends SubsystemBase {
-  private final PWMVictorSPX shooterMotor = new PWMVictorSPX(Constants.MOTOR_SHOOTER_PORT);
+  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_SHOOTER_PORT);
   public static double overrideShooterSpeed = Constants.kShooterSpeed; //Set initial vale
 
   // Put methods for controlling this subsystem
@@ -38,7 +39,13 @@ public class Shooter extends SubsystemBase {
     //    .withPosition(0,3);
 
   }
+  public void init() {
 
+    shooterMotor.configFactoryDefault();
+    shooterMotor.setInverted(false);
+    shooterMotor.setNeutralMode(NeutralMode.Brake);
+
+  }
    //Start the intake motor //TEST
    public void start() {
     //shooterMotor.set(Constants.kShooterSpeed);

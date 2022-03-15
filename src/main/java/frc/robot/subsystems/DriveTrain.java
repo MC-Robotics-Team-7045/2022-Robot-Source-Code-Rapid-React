@@ -9,25 +9,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
  */
 public class DriveTrain extends SubsystemBase {
-  private final PWMVictorSPX motorLeftFront = new PWMVictorSPX(Constants.MOTOR_LEFT_FRONT_PORT);
-  private final PWMVictorSPX motorLeftRear = new PWMVictorSPX(Constants.MOTOR_LEFT_REAR_PORT);
-  private final PWMVictorSPX motorRightFront = new PWMVictorSPX(Constants.MOTOR_RIGHT_FRONT_PORT);
-  private final PWMVictorSPX motorRightRear = new PWMVictorSPX(Constants.MOTOR_RIGHT_REAR_PORT);
+  private final WPI_VictorSPX motorLeftFront = new WPI_VictorSPX(Constants.CAN_MOTOR_LEFT_FRONT_PORT);
+  private final WPI_VictorSPX motorLeftRear = new WPI_VictorSPX(Constants.CAN_MOTOR_LEFT_REAR_PORT); //Set as follower
+  private final WPI_VictorSPX motorRightFront = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_FRONT_PORT);
+  private final WPI_VictorSPX motorRightRear = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_REAR_PORT); //Set as follower
 
-  private final MotorControllerGroup leftMotors = new MotorControllerGroup(motorLeftFront, motorLeftRear);
-  private final MotorControllerGroup rightMotors = new MotorControllerGroup(motorRightFront, motorRightRear);
-
-  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+  private final DifferentialDrive drive = new DifferentialDrive(motorLeftFront, motorRightFront);
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -40,7 +36,20 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void init() {
+    //Factory Default all hardware to prevent unexpected behaviour
+    motorLeftFront.configFactoryDefault();
+    motorLeftRear.configFactoryDefault();
+    motorRightFront.configFactoryDefault();
+    motorRightRear.configFactoryDefault();
+    //Set rear motors to FOLLOW front motors
+    motorLeftRear.follow(motorLeftFront);
+    motorRightRear.follow(motorRightFront);
 
+    motorLeftFront.setInverted(false);
+    motorRightFront.setInverted(true);
+    motorLeftRear.setInverted(InvertType.FollowMaster);
+    motorRightRear.setInverted(InvertType.FollowMaster);
+    
     drive.arcadeDrive(0, 0);
     drive.setSafetyEnabled(false);
 

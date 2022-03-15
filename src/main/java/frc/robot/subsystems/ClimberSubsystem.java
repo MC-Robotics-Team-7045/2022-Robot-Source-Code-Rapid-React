@@ -10,19 +10,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.AnalogInput;
-//import edu.wpi.first.wpilibj.Counter;
 import frc.robot.Constants;
-
-//import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
  */
 public class ClimberSubsystem extends SubsystemBase {
-  private final PWMVictorSPX climberMotor = new PWMVictorSPX(Constants.MOTOR_CLIMBER_PORT);
+  private final WPI_VictorSPX climberMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_CLIMBER_PORT);
   // public DigitalInput upperLimit = new
   // DigitalInput(Constants.climber_UPPER_LIMIT_DIO_PORT);
   // public DigitalInput lowerLimit = new
@@ -45,6 +42,10 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void init() {
+
+    climberMotor.configFactoryDefault();
+    climberMotor.setInverted(false);
+    climberMotor.setNeutralMode(NeutralMode.Brake);
 
   }
 

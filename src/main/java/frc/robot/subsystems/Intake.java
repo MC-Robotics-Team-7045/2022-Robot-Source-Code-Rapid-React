@@ -12,14 +12,13 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
-//import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 /**
  * Add your docs here.
  */
 public class Intake extends SubsystemBase {
-  private final PWMVictorSPX intakeMotor = new PWMVictorSPX(Constants.MOTOR_INTAKE_PORT);
+  private final WPI_VictorSPX intakeMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_INTAKE_PORT);
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -33,6 +32,13 @@ public class Intake extends SubsystemBase {
       Shuffleboard.getTab("Shooter").add("Intake Motor", intakeMotor)
           .withPosition(1, 2);
     }
+  }
+  public void init() {
+
+    intakeMotor.configFactoryDefault();
+    intakeMotor.setInverted(false);
+    intakeMotor.setNeutralMode(NeutralMode.Brake);
+
   }
   @Override
   public void periodic() {
