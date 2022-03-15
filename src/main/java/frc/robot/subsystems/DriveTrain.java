@@ -24,20 +24,13 @@ public class DriveTrain extends SubsystemBase {
   private final WPI_VictorSPX motorRightFront = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_FRONT_PORT);
   private final WPI_VictorSPX motorRightRear = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_REAR_PORT); //Set as follower
 
-  private final DifferentialDrive drive = new DifferentialDrive(motorLeftFront, motorRightFront);
+  private DifferentialDrive drive; 
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public DriveTrain() {
     super();
-
-    // LiveWindow
-    addChild("T-Drive", drive);
-
-  }
-
-  public void init() {
-    //Factory Default all hardware to prevent unexpected behaviour
+    
     motorLeftFront.configFactoryDefault();
     motorLeftRear.configFactoryDefault();
     motorRightFront.configFactoryDefault();
@@ -51,10 +44,20 @@ public class DriveTrain extends SubsystemBase {
     motorRightFront.setNeutralMode(NeutralMode.Brake);
     motorRightRear.setNeutralMode(NeutralMode.Brake);
 
-    motorLeftFront.setInverted(false);
-    motorRightFront.setInverted(true);
+    motorLeftFront.setInverted(InvertType.None);
+    motorRightFront.setInverted(InvertType.InvertMotorOutput ); //arcade drive takes care of inversion?
     motorLeftRear.setInverted(InvertType.FollowMaster);
     motorRightRear.setInverted(InvertType.FollowMaster);
+
+    drive = new DifferentialDrive(motorLeftFront, motorRightFront);
+    // LiveWindow
+    addChild("T-Drive", drive);
+
+  }
+
+  public void init() {
+    //Factory Default all hardware to prevent unexpected behaviour
+   
 
     drive.arcadeDrive(0, 0);
     drive.setSafetyEnabled(false);
