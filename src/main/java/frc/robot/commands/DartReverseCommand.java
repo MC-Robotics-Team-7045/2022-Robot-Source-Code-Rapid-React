@@ -38,7 +38,7 @@ public class DartReverseCommand extends CommandBase {
   @Override
   public void execute() {
 
-    m_dart.up();
+    m_dart.down();
     if (Constants.kDebug) {
       System.out.print("Dart retracting Reverse - ");
       System.out.format("%.2f", m_dart.dartPot.getVoltage());
@@ -73,16 +73,26 @@ public class DartReverseCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-    if (m_dart.dartVoltage() > Constants.kDartReverseVoltage) { // limit reached
+//UNCOMMENT TO USE STRING POTENTIOMETER   
+//    if (m_dart.dartVoltage() > Constants.kDartReverseVoltage) { // limit reached
 
+//      if (Constants.kDebug) {
+//        System.out.print("Dart retracting Reverse - ");
+//        System.out.format("%.2f", m_dart.dartPot.getVoltage());
+//        System.out.println(" - LIMIT REACHED!");
+//      }
+//    return true;
+//    } else {
+//      //return false;
+//    }
+     //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev? 
+  if (m_dart.isForwardLimitTriggered()){
       if (Constants.kDebug) {
-        System.out.print("Dart retracting Reverse - ");
-        System.out.format("%.2f", m_dart.dartPot.getVoltage());
-        System.out.println(" - LIMIT REACHED!");
+        System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
       }
-      return true;
-    } else {
-      return false;
-    }
+    return true;
+  } else {
+    return false;
   }
+}
 }

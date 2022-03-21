@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -36,6 +38,14 @@ public class DartSubsystem extends SubsystemBase {
   public DartSubsystem() {
     super();
 
+    dartMotor.configFactoryDefault();
+    dartMotor.setInverted(false);
+    dartMotor.setNeutralMode(NeutralMode.Brake);
+
+    //Connect Hall Effect Sensors on Dart to TalonSRX Breakout Limit inpit pins.
+    dartMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+    dartMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+
     // LiveWindow
     // addChild("dart Motor", dartMotor);
     if (Constants.kDebug) {
@@ -47,9 +57,8 @@ public class DartSubsystem extends SubsystemBase {
 
   public void init() {
 
-    dartMotor.configFactoryDefault();
-    dartMotor.setInverted(false);
-    dartMotor.setNeutralMode(NeutralMode.Brake);
+    dartMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+    dartMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
   }
 
@@ -91,4 +100,19 @@ public class DartSubsystem extends SubsystemBase {
     return dartPot.getVoltage();
   }
 
+  public boolean isForwardLimitTriggered(){
+    if (dartMotor.isFwdLimitSwitchClosed()==1){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+ public boolean isReverseLimitTriggered(){
+    if (dartMotor.isRevLimitSwitchClosed()==1){
+      return true;
+    } else {
+      return false;
+    }
+  } 
 }
