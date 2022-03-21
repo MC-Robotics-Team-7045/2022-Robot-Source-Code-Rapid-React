@@ -30,15 +30,16 @@ public final class Constants {
     // PWM D port 4
     // PWM H port 5
 
-    public static final int MOTOR_LEFT_FRONT_PORT = 0; // C&B
-    public static final int MOTOR_LEFT_REAR_PORT = 1;
-    public static final int MOTOR_RIGHT_FRONT_PORT = 2; // E&F
-    public static final int MOTOR_RIGHT_REAR_PORT = 3;
-    public static final int MOTOR_INTAKE_PORT = 6; // A
-    public static final int MOTOR_INDEXER_PORT = 4; // D
     public static final int MOTOR_SHOOTER_PORT = 5; // H
-    public static final int MOTOR_COLOR_WHEEL_PORT = 7;
     public static final int MOTOR_CLIMBER_PORT = 8;
+    //public static final int MOTOR_LEFT_FRONT_PORT = 0; // C&B
+    //public static final int MOTOR_RIGHT_FRONT_PORT = 2; // E&F
+    //public static final int MOTOR_RIGHT_REAR_PORT = 3;
+    //public static final int MOTOR_INTAKE_PORT = 6; // A
+    //public static final int MOTOR_INDEXER_PORT = 4; // D
+    //public static final int MOTOR_SHOOTER_PORT = 5; // H
+    //public static final int MOTOR_COLOR_WHEEL_PORT = 7;
+    //public static final int MOTOR_CLIMBER_PORT = 8;
 
     //CAN Bus Device IDs
     public static final int CAN_MOTOR_LEFT_FRONT_PORT = 11; // C&B
