@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * Add your docs here.
  */
 public class DriveTrain extends SubsystemBase {
-  private final WPI_VictorSPX motorLeftFront = new WPI_VictorSPX(Constants.CAN_MOTOR_LEFT_FRONT_PORT);
-  private final WPI_VictorSPX motorLeftRear = new WPI_VictorSPX(Constants.CAN_MOTOR_LEFT_REAR_PORT); //Set as follower
-  private final WPI_VictorSPX motorRightFront = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_FRONT_PORT);
-  private final WPI_VictorSPX motorRightRear = new WPI_VictorSPX(Constants.CAN_MOTOR_RIGHT_REAR_PORT); //Set as follower
+  private final CANSparkMax motorLeftFront = new CANSparkMax(Constants.CAN_MOTOR_LEFT_FRONT_PORT, MotorType.kBrushless);
+  private final CANSparkMax motorLeftRear = new CANSparkMax(Constants.CAN_MOTOR_LEFT_REAR_PORT, MotorType.kBrushless); //Set as follower
+  private final CANSparkMax motorRightFront = new CANSparkMax(Constants.CAN_MOTOR_RIGHT_FRONT_PORT, MotorType.kBrushless);
+  private final CANSparkMax motorRightRear = new CANSparkMax(Constants.CAN_MOTOR_RIGHT_REAR_PORT, MotorType.kBrushless); //Set as follower
 
   private DifferentialDrive drive; 
 
@@ -31,23 +31,23 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     super();
     
-    motorLeftFront.configFactoryDefault();
-    motorLeftRear.configFactoryDefault();
-    motorRightFront.configFactoryDefault();
-    motorRightRear.configFactoryDefault();
+    motorLeftFront.restoreFactoryDefaults();
+    motorLeftRear.restoreFactoryDefaults();
+    motorRightFront.restoreFactoryDefaults();
+    motorRightRear.restoreFactoryDefaults();
     //Set rear motors to FOLLOW front motors
     motorLeftRear.follow(motorLeftFront);
     motorRightRear.follow(motorRightFront);
     //Set Neutral Modes to BRAKE
-    motorLeftFront.setNeutralMode(NeutralMode.Brake);
-    motorLeftRear.setNeutralMode(NeutralMode.Brake);
-    motorRightFront.setNeutralMode(NeutralMode.Brake);
-    motorRightRear.setNeutralMode(NeutralMode.Brake);
+    motorLeftFront.setIdleMode(IdleMode.kBrake);
+    motorLeftRear.setIdleMode(IdleMode.kBrake);
+    motorRightFront.setIdleMode(IdleMode.kBrake);
+    motorRightRear.setIdleMode(IdleMode.kBrake);
 
-    motorLeftFront.setInverted(InvertType.None);
-    motorRightFront.setInverted(InvertType.InvertMotorOutput ); //arcade drive takes care of inversion?
-    motorLeftRear.setInverted(InvertType.FollowMaster);
-    motorRightRear.setInverted(InvertType.FollowMaster);
+    motorLeftFront.setInverted(false);
+    motorRightFront.setInverted(true); //arcade drive takes care of inversion?
+    //motorLeftRear.setInverted(false; //set as follower
+    //motorRightRear.setInverted(true);
 
     drive = new DifferentialDrive(motorLeftFront, motorRightFront);
     // LiveWindow

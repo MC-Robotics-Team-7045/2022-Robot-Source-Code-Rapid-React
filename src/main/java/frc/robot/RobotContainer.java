@@ -24,11 +24,11 @@ import frc.robot.commands.IndexerRevCommand;
 import frc.robot.commands.ShooterToggleCommand;
 import frc.robot.commands.ShooterPIDDecRPMCommand;
 import frc.robot.commands.ShooterPIDIncRPMCommand;
-import frc.robot.commands.ClimberRetractCommand;
-import frc.robot.commands.ClimberExtendCommand;
+import frc.robot.commands.ClimberStaticRetractCommand;
+import frc.robot.commands.ClimberStaticExtendCommand;
 import frc.robot.commands.AdjustBallCountCommand;
 import frc.robot.subsystems.ColorSubsystem;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ClimberStaticSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.Lidar;
@@ -73,7 +73,7 @@ public class RobotContainer {
   // private final ColorWheelSubsystem m_color_wheel = new ColorWheelSubsystem();
   private final ColorSubsystem m_color = new ColorSubsystem();
 
-  private final ClimberSubsystem m_climber = new ClimberSubsystem();
+  private final ClimberStaticSubsystem m_climber = new ClimberStaticSubsystem();
 
   private final CommandBase m_autonomousCommand = new Autonomous(driveTrain, m_lidar, indexer, m_shooter, intake);
 
@@ -157,8 +157,8 @@ public class RobotContainer {
     firePowerCell.whenPressed(new FireCommand(indexer, m_shooter, intake));
     incShooterRPM.whenPressed(new ShooterPIDIncRPMCommand(m_shooter)); // POV
     decShooterRPM.whenPressed(new ShooterPIDDecRPMCommand(m_shooter)); // POV
-    climberUp.toggleWhenPressed(new ClimberExtendCommand(m_climber));
-    climberDown.toggleWhenPressed(new ClimberRetractCommand(m_climber));
+    climberUp.toggleWhenPressed(new ClimberStaticExtendCommand(m_climber));
+    climberDown.toggleWhenPressed(new ClimberStaticRetractCommand(m_climber));
     adjustBallCount.toggleWhenPressed(new AdjustBallCountCommand(indexer));
 
   }

@@ -23,32 +23,15 @@ package frc.robot;
 public final class Constants {
     public static final boolean kDebug = true;
 
-    // PWM Ports
-    // PWM B/C ports 0/1
-    // PWM E/F ports 2/3
-    // PWM A port 6
-    // PWM D port 4
-    // PWM H port 5
-
-    //public static final int MOTOR_LEFT_FRONT_PORT = 0; // C&B
-    //public static final int MOTOR_LEFT_REAR_PORT = 1;
-    //public static final int MOTOR_RIGHT_FRONT_PORT = 2; // E&F
-    //public static final int MOTOR_RIGHT_REAR_PORT = 3;
-    //public static final int MOTOR_INTAKE_PORT = 6; // A
-    //public static final int MOTOR_INDEXER_PORT = 4; // D
-    //public static final int MOTOR_SHOOTER_PORT = 5; // H
-    //public static final int MOTOR_COLOR_WHEEL_PORT = 7;
-    //public static final int MOTOR_CLIMBER_PORT = 8;
-
     //CAN Bus Device IDs
-    public static final int CAN_MOTOR_LEFT_FRONT_PORT = 11; // C&B
-    public static final int CAN_MOTOR_LEFT_REAR_PORT = 12;
-    public static final int CAN_MOTOR_RIGHT_FRONT_PORT = 14; // E&F
-    public static final int CAN_MOTOR_RIGHT_REAR_PORT = 15;
+    public static final int CAN_MOTOR_LEFT_FRONT_PORT = 30;  // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_LEFT_REAR_PORT = 31;   // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_RIGHT_FRONT_PORT = 32; // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_RIGHT_REAR_PORT = 33;  // SparkMAX with NEO Brushless
     public static final int CAN_MOTOR_INTAKE_PORT = 10; // A
     public static final int CAN_MOTOR_INDEXER_PORT = 13; // D
     public static final int CAN_MOTOR_SHOOTER_PORT = 17; // H
-    public static final int CAN_MOTOR_CLIMBER_PORT = 16;
+    public static final int CAN_MOTOR_CLIMBER_PORT = 34;     // SparkMAX with NEO Brushless
    
 
     // ANalog INput

@@ -10,16 +10,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Constants;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * Add your docs here.
  */
-public class ClimberSubsystem extends SubsystemBase {
-  private final WPI_VictorSPX climberMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_CLIMBER_PORT);
+public class ClimberStaticSubsystem extends SubsystemBase {
+  private final CANSparkMax climberMotor = new CANSparkMax(Constants.CAN_MOTOR_CLIMBER_PORT, MotorType.kBrushless);
   // public DigitalInput upperLimit = new
   // DigitalInput(Constants.climber_UPPER_LIMIT_DIO_PORT);
   // public DigitalInput lowerLimit = new
@@ -29,7 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
   // public Counter m_LIDAR = new Counter(9);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public ClimberSubsystem() {
+  public ClimberStaticSubsystem() {
     super();
 
     // LiveWindow
@@ -43,9 +45,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void init() {
 
-    climberMotor.configFactoryDefault();
+    climberMotor.restoreFactoryDefaults();
     climberMotor.setInverted(false);
-    climberMotor.setNeutralMode(NeutralMode.Brake);
+    climberMotor.setIdleMode(IdleMode.kBrake);
 
   }
 
@@ -54,7 +56,7 @@ public class ClimberSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     SmartDashboard.putData("Climber String", climberPot);
-    SmartDashboard.putData("Climber Motor", climberMotor);
+    SmartDashboard.putData("Climber Motor", (Sendable) climberMotor);
 
   }
 
