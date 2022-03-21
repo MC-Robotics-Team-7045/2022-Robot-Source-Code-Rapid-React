@@ -25,10 +25,16 @@ import frc.robot.commands.ShooterToggleCommand;
 import frc.robot.commands.ShooterPIDDecRPMCommand;
 import frc.robot.commands.ShooterPIDIncRPMCommand;
 import frc.robot.commands.ClimberStaticRetractCommand;
+import frc.robot.commands.DartForwardCommand;
+import frc.robot.commands.DartReverseCommand;
 import frc.robot.commands.ClimberStaticExtendCommand;
+import frc.robot.commands.ClimberActiveRetractCommand;
+import frc.robot.commands.ClimberActiveExtendCommand;
 import frc.robot.commands.AdjustBallCountCommand;
 import frc.robot.subsystems.ColorSubsystem;
+import frc.robot.subsystems.ClimberActiveSubsystem;
 import frc.robot.subsystems.ClimberStaticSubsystem;
+import frc.robot.subsystems.DartSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.Lidar;
@@ -58,14 +64,14 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
 
   private final Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
-  // private final XboxController xbox = new
-  // XboxController(Constants.XBOX_CONTROLLER_PORT);
+  private final XboxController xbox = new XboxController(Constants.XBOX_CONTROLLER_PORT);
 
   private final LimeLight limeLight = new LimeLight(false);
   private final Intake intake = new Intake();
   private final Indexer indexer = new Indexer();
   private final Lidar m_lidar = new Lidar();
   private final ShooterPID m_shooter = new ShooterPID();
+  private final DartSubsystem m_dart = new DartSubsystem();
   // private final Shooter m_shooter = new Shooter();
 
   // private final Compressor c_cylinder = new Compressor();
@@ -73,7 +79,8 @@ public class RobotContainer {
   // private final ColorWheelSubsystem m_color_wheel = new ColorWheelSubsystem();
   private final ColorSubsystem m_color = new ColorSubsystem();
 
-  private final ClimberStaticSubsystem m_climber = new ClimberStaticSubsystem();
+  private final ClimberStaticSubsystem m_static_climber = new ClimberStaticSubsystem();
+  private final ClimberActiveSubsystem m_active_climber = new ClimberActiveSubsystem();
 
   private final CommandBase m_autonomousCommand = new Autonomous(driveTrain, m_lidar, indexer, m_shooter, intake);
 
@@ -89,7 +96,9 @@ public class RobotContainer {
       SmartDashboard.putData(m_lidar);
       SmartDashboard.putData(intake);
       SmartDashboard.putData(m_shooter);
-      SmartDashboard.putData(m_climber);
+      SmartDashboard.putData(m_dart);
+      //SmartDashboard.putData(m_static_climber);
+      //SmartDashboard.putData(m_active_climber);
     }
     driveTrain.setDefaultCommand(
         new DriveCommand(driveTrain, () -> -joystick.getY(), () -> joystick.getZ(), () -> -joystick.getThrottle()));
@@ -117,8 +126,8 @@ public class RobotContainer {
     final JoystickButton firePowerCell = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_SHOOT);
     final POVButton incShooterRPM = new POVButton(joystick, 0);
     final POVButton decShooterRPM = new POVButton(joystick, 180);
-    final JoystickButton climberUp = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_CLIMBER_UP);
-    final JoystickButton climberDown = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_CLIMBER_DOWN);
+    final JoystickButton staticClimberUp = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_CLIMBER_UP);
+    final JoystickButton staticClimberDown = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_CLIMBER_DOWN);
     final JoystickButton adjustBallCount = new JoystickButton(joystick, Constants.JOYSTICK_BUTTON_BALL_COUNTER);
     // final JoystickButton autoRotateColorWHeel = new JoystickButton(joystick,
     // Constants.JOYSTICK_BUTTON_COLOR_WHEEL_AUTO);
@@ -130,19 +139,14 @@ public class RobotContainer {
     // Constants.JOYSTICK_BUTTON_CYLINDER);
 
     // Xbox Bindings
-
-    // final JoystickButton buttonRED = new JoystickButton(xbox,
-    // Constants.joystickRedButton);
-    // final JoystickButton buttonYELLOW = new JoystickButton(xbox,
-    // Constants.joystickYellowButton);
-    // final JoystickButton buttonGREEN = new JoystickButton(xbox,
-    // Constants.joystickGreenButton);
-    // final JoystickButton buttonBLUE = new JoystickButton(xbox,
-    // Constants.joystickBlueButton);
-    // final JoystickButton buttonLB = new JoystickButton(xbox,
-    // Constants.joystickLBButton);
-    // final JoystickButton buttonRB = new JoystickButton(xbox,
-    // Constants.joystickRBButton);
+    final POVButton staticClimberUpXbox = new POVButton(xbox, 0);
+    final POVButton staticClimberDownXbox = new POVButton(xbox, 180);
+    final JoystickButton buttonRED = new JoystickButton(xbox, Constants.xboxRedButton);
+    final JoystickButton buttonYELLOW = new JoystickButton(xbox, Constants.xboxYellowButton);
+    final JoystickButton buttonGREEN = new JoystickButton(xbox, Constants.xboxGreenButton);
+    final JoystickButton buttonBLUE = new JoystickButton(xbox, Constants.xboxBlueButton);
+    //final JoystickButton buttonLB = new JoystickButton(xbox, Constants.joystickLBButton);
+    //final JoystickButton buttonRB = new JoystickButton(xbox, Constants.joystickRBButton);
 
     // Joystick COmmands
     // aim.whileHeld(new LimelightAutoAlign(driveTrain, limeLight, () ->
@@ -157,9 +161,16 @@ public class RobotContainer {
     firePowerCell.whenPressed(new FireCommand(indexer, m_shooter, intake));
     incShooterRPM.whenPressed(new ShooterPIDIncRPMCommand(m_shooter)); // POV
     decShooterRPM.whenPressed(new ShooterPIDDecRPMCommand(m_shooter)); // POV
-    climberUp.toggleWhenPressed(new ClimberStaticExtendCommand(m_climber));
-    climberDown.toggleWhenPressed(new ClimberStaticRetractCommand(m_climber));
+    staticClimberUp.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));
+    staticClimberDown.toggleWhenPressed(new ClimberStaticRetractCommand(m_static_climber));
+    staticClimberUpXbox.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));
+    staticClimberDownXbox.toggleWhenPressed(new ClimberStaticRetractCommand(m_static_climber));
+    buttonYELLOW.toggleWhenPressed(new ClimberActiveExtendCommand(m_active_climber));
+    buttonGREEN.toggleWhenPressed(new ClimberActiveRetractCommand(m_active_climber));
+    buttonBLUE.toggleWhenPressed(new DartReverseCommand(m_dart));
+    buttonRED.toggleWhenPressed(new DartForwardCommand(m_dart));
     adjustBallCount.toggleWhenPressed(new AdjustBallCountCommand(indexer));
+
 
   }
 
@@ -182,6 +193,6 @@ public class RobotContainer {
     intake.stop();
     m_shooter.stop();
     indexer.stop();
-    m_climber.stop();
+    m_static_climber.stop();
   }
 }

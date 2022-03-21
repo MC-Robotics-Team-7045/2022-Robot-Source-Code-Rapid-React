@@ -31,12 +31,13 @@ public final class Constants {
     public static final int CAN_MOTOR_INTAKE_PORT = 10; // A
     public static final int CAN_MOTOR_INDEXER_PORT = 13; // D
     public static final int CAN_MOTOR_SHOOTER_PORT = 17; // H
-    public static final int CAN_MOTOR_CLIMBER_PORT = 34;     // SparkMAX with NEO Brushless
-   
-
+    public static final int CAN_MOTOR_STATIC_CLIMBER_PORT = 34;     // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_ACTIVE_CLIMBER_PORT = 35;     // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_DART_PORT = 41;     // TalonSRX
     // ANalog INput
-    public static final int CLIMBER_POT_PORT = 3;
-
+    public static final int CLIMBER_STATIC_POT_PORT = 3;
+    public static final int CLIMBER_ACTIVE_POT_PORT = 2;
+    public static final int DART_POT_PORT = 1;
     // Joystick Buttons
     public static final int JOYSTICK_BUTTON_SHOOT = 1;
     public static final int JOYSTICK_BUTTON_AIM = 2;
@@ -54,12 +55,16 @@ public final class Constants {
     public static final int DSOL_PORT_REV = 1;
 
     // XBOX Buttons
-    public static final int joystickRedButton = 2;
-    public static final int joystickYellowButton = 4;
-    public static final int joystickGreenButton = 1;
-    public static final int joystickBlueButton = 3;
-    public static final int joystickLBButton = 5;
-    public static final int joystickRBButton = 6;
+    public static final int xboxGreenButton = 1;
+    public static final int xboxRedButton = 2;
+    public static final int xboxBlueButton = 3;
+    public static final int xboxYellowButton = 4;
+    public static final int xboxLBButton = 5;
+    public static final int xboxRBButton = 6;
+    public static final int xboxStartButton = 7;
+    public static final int xboxMenuButton = 8;
+    public static final int xboxLStickButton = 9;
+    public static final int xboxRStickButton = 10;
 
     // DIO Ports
     // public static final int ENCODER1_DIO_PORT_A = 0;
@@ -111,12 +116,23 @@ public final class Constants {
     // Intake Motor Settings
     public static final double kIntakeSpeed = 0.80; // Speed of Intake Motor
 
-    // Climber Motor Settings
-    public static final double kClimberSpeed = 0.60; // PWM Speed of Climber Motor
-    public static final double kClimberHoldTIme = 15.0; // Seconds to engage hold routine (small amount to climber PWM)
-    public static final double kClimberHoldSpeed = 0.15; // PWM Speed during "hold" period
-    public static final double kClimberRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
-    public static final double kClimberExtendedVoltage = 2; // Set point for Climber POT when extended
+    // Dart Motor Settings
+    public static final double kDartSpeed = 0.6;
+    public static final double kDartForwardVoltage = 2.0; //POT Voltage
+    public static final double kDartReverseVoltage = 4.0; //POT Voltage
+
+    // Climber Static Motor Settings
+    public static final double kClimberStaticSpeed = 0.60; // PWM Speed of Climber Motor
+    public static final double kClimberStaticHoldTIme = 15.0; // Seconds to engage hold routine (small amount to climber PWM)
+    public static final double kClimberStaticHoldSpeed = 0.15; // PWM Speed during "hold" period
+    public static final double kClimberStaticRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberStaticExtendedVoltage = 2; // Set point for Climber POT when extended
+    // Climber Active Motor Settings
+    public static final double kClimberActiveSpeed = 0.60; // PWM Speed of Climber Motor
+    public static final double kClimberActiveHoldTIme = 15.0; // Seconds to engage hold routine (small amount to climber PWM)
+    public static final double kClimberActiveHoldSpeed = 0.15; // PWM Speed during "hold" period
+    public static final double kClimberActiveRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberActiveExtendedVoltage = 2; // Set point for Climber POT when extended
 
     // Indexer Encoder
 
@@ -183,5 +199,7 @@ public final class Constants {
     // replace with above
     public static final double kColorWheelEncPPR = 7.0; // ENcoder pulses per revolution
     public static final double kColorWheelEncGearRatio = 27.0; // kEnc*number of revolutions
+
+
 
 }

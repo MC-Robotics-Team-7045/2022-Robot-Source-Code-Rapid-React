@@ -44,7 +44,7 @@ public class ClimberStaticRetractCommand extends CommandBase {
     }
 
     if (Constants.kDebug) {
-      System.out.print("Climber retracting - ");
+      System.out.print("Static Climber retracting - ");
       System.out.format("%.2f", m_Climber.climberPot.getVoltage());
       if (holdStage) {
         System.out.print(" HOLD time: ");
@@ -88,7 +88,7 @@ public class ClimberStaticRetractCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage increases as string retracts. 0" is approx 4.8V. Full extension < 1V
-    if (!holdStage && m_Climber.climberVoltage() > Constants.kClimberRetractedVoltage) { // limit reached arm fully
+    if (!holdStage && m_Climber.climberVoltage() > Constants.kClimberStaticRetractedVoltage) { // limit reached arm fully
                                                                                          // retracted.
 
       holdStage = true;
@@ -98,12 +98,12 @@ public class ClimberStaticRetractCommand extends CommandBase {
       // prevStage=holdStage;
 
       if (Constants.kDebug) {
-        System.out.print("Climber retracting - ");
+        System.out.print("Static Climber retracting - ");
         System.out.format("%.2f", m_Climber.climberPot.getVoltage());
         System.out.println(" - LIMIT REACHED!");
       }
     }
-    if (holdStage && (Timer.getFPGATimestamp() - timeStamp > Constants.kClimberHoldTIme)) {
+    if (holdStage && (Timer.getFPGATimestamp() - timeStamp > Constants.kClimberStaticHoldTIme)) {
       System.out.println("End of HOLD Stage");
       return true; // End hold routine after HoldTime expired
     } else {

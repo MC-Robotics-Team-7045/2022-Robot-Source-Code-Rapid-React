@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.ClimberStaticSubsystem;
+import frc.robot.subsystems.ClimberActiveSubsystem;
 
 import frc.robot.Constants;
 
-public class ClimberStaticExtendCommand extends CommandBase {
-  private final ClimberStaticSubsystem m_Climber;
+public class ClimberActiveExtendCommand extends CommandBase {
+  private final ClimberActiveSubsystem m_Climber;
 
   // Creates a new ClimberFwdCommand.
 
-  public ClimberStaticExtendCommand(ClimberStaticSubsystem climbervar) {
+  public ClimberActiveExtendCommand(ClimberActiveSubsystem climbervar) {
     super();
     m_Climber = climbervar;
 
@@ -40,7 +40,7 @@ public class ClimberStaticExtendCommand extends CommandBase {
 
     m_Climber.up();
     if (Constants.kDebug) {
-      System.out.print("Static Climber extending - ");
+      System.out.print("Active Climber extending - ");
       System.out.format("%.2f", m_Climber.climberPot.getVoltage());
       System.out.println("");
     }
@@ -73,10 +73,10 @@ public class ClimberStaticExtendCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-    if (m_Climber.climberVoltage() < Constants.kClimberStaticExtendedVoltage) { // limit reached
+    if (m_Climber.climberVoltage() < Constants.kClimberActiveExtendedVoltage) { // limit reached
 
       if (Constants.kDebug) {
-        System.out.print("Static Climber extending - ");
+        System.out.print("Active Climber extending - ");
         System.out.format("%.2f", m_Climber.climberPot.getVoltage());
         System.out.println(" - LIMIT REACHED!");
       }

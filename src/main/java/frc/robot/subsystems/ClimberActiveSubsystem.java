@@ -20,26 +20,27 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 /**
  * Add your docs here.
  */
-public class ClimberStaticSubsystem extends SubsystemBase {
-  private final CANSparkMax climberMotor = new CANSparkMax(Constants.CAN_MOTOR_STATIC_CLIMBER_PORT, MotorType.kBrushless);
+public class ClimberActiveSubsystem extends SubsystemBase {
+  private final CANSparkMax climberMotor = new CANSparkMax(Constants.CAN_MOTOR_ACTIVE_CLIMBER_PORT, MotorType.kBrushless);
   // public DigitalInput upperLimit = new
   // DigitalInput(Constants.climber_UPPER_LIMIT_DIO_PORT);
   // public DigitalInput lowerLimit = new
   // DigitalInput(Constants.climber_LOWER_LIMIT_DIO_PORT);
-  public AnalogInput climberPot = new AnalogInput(Constants.CLIMBER_STATIC_POT_PORT);
+  public AnalogInput climberPot = new AnalogInput(Constants.CLIMBER_ACTIVE_POT_PORT);
+
 
   // public Counter m_LIDAR = new Counter(9);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public ClimberStaticSubsystem() {
+  public ClimberActiveSubsystem() {
     super();
 
     // LiveWindow
     // addChild("climber Motor", climberMotor);
     if (Constants.kDebug) {
       Shuffleboard.selectTab("Shooter");
-      //Shuffleboard.getTab("Shooter").add("Climber Motor", climberMotor).withPosition(3, 1);
-      Shuffleboard.getTab("Shooter").add("Active Climber Voltage", climberPot).withPosition(3, 2);
+//      Shuffleboard.getTab("Shooter").add("Climber Motor", climberMotor).withPosition(3, 1);
+      Shuffleboard.getTab("Shooter").add("Climber Voltage", climberPot).withPosition(3, 2);
     }
   }
 
@@ -55,24 +56,24 @@ public class ClimberStaticSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    SmartDashboard.putData("Static Climber String", climberPot);
-    SmartDashboard.putNumber("Static Climber Motor", climberMotor.getAppliedOutput());
+    SmartDashboard.putData("Active Climber String", climberPot);
+    SmartDashboard.putNumber("Active Climber Motor", climberMotor.getAppliedOutput());
 
   }
 
   // Start the climber motor
   public void up() {
-    climberMotor.set(Constants.kClimberStaticSpeed);
+    climberMotor.set(Constants.kClimberActiveSpeed);
   }
 
   // Reverse the climber motor
   public void down() {
-    climberMotor.set(-Constants.kClimberStaticSpeed);
+    climberMotor.set(-Constants.kClimberActiveSpeed);
   }
 
   // Reverse the climber motor
   public void hold() {
-    climberMotor.set(-Constants.kClimberStaticHoldSpeed);
+    climberMotor.set(-Constants.kClimberActiveHoldSpeed);
   }
 
   // Stops the intake motor

@@ -8,20 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-import frc.robot.subsystems.ClimberStaticSubsystem;
-
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
+import frc.robot.subsystems.ClimberActiveSubsystem;
 
-public class ClimberStaticExtendCommand extends CommandBase {
-  private final ClimberStaticSubsystem m_Climber;
+public class ClimberActiveRetractCommand extends CommandBase {
+  private final ClimberActiveSubsystem m_Climber;
+  private double timeStamp;
+  private boolean holdStage = false;
 
-  // Creates a new ClimberFwdCommand.
+  // Creates a new Climber Retract Command.
 
-  public ClimberStaticExtendCommand(ClimberStaticSubsystem climbervar) {
+  public ClimberActiveRetractCommand(ClimberActiveSubsystem climbervar) {
     super();
     m_Climber = climbervar;
-
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climbervar);
 
@@ -31,40 +31,55 @@ public class ClimberStaticExtendCommand extends CommandBase {
   @Override
   public void initialize() {
     // System.out.println("FClimber-Init");
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    m_Climber.up();
+    if (holdStage) {
+      m_Climber.hold();
+    } else {
+      m_Climber.down();
+    }
+
     if (Constants.kDebug) {
-      System.out.print("Static Climber extending - ");
+      System.out.print("Active Climber retracting - ");
       System.out.format("%.2f", m_Climber.climberPot.getVoltage());
+      if (holdStage) {
+        System.out.print(" HOLD time: ");
+        System.out.format("%.2f", Timer.getFPGATimestamp() - timeStamp);
+
+      }
       System.out.println("");
     }
+
     /*
-     * //TOGGLE FUnction with no Limits
+     * //TOGGLE FUNCTION WITH NO LIMITS
      * if (m_Climber.isRunning()){
      * m_Climber.stop();
+     * 
+     * 
      * }
      * else{
-     * m_Climber.up();
+     * m_Climber.down();
      * }
      */
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Climber.stop();
+    holdStage = false; // reset Hold stage
+
     // System.out.println("FClimber-Exec-END");
   }
 
   // Returns true when the command should end. True to run once.
   /*
-   * Hall Effect Sensor
+   * Hall Effect Sensor - NOT WORKING. Switched to linear string potentiometer
    * Sensor is driven low in the presence of a magnetic field, and high impedance
    * when there is no magnet present
    * Use this as a limit switch.
@@ -72,17 +87,32 @@ public class ClimberStaticExtendCommand extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-    if (m_Climber.climberVoltage() < Constants.kClimberStaticExtendedVoltage) { // limit reached
+    // Voltage increases as string retracts. 0" is approx 4.8V. Full extension < 1V
+    if (!holdStage && m_Climber.climberVoltage() > Constants.kClimberActiveRetractedVoltage) { // limit reached arm fully
+                                                                                         // retracted.
+
+      holdStage = true;
+      // if (holdStage && !prevStage){
+      timeStamp = Timer.getFPGATimestamp();
+      // }
+      // prevStage=holdStage;
 
       if (Constants.kDebug) {
-        System.out.print("Static Climber extending - ");
+        System.out.print("Active Climber retracting - ");
         System.out.format("%.2f", m_Climber.climberPot.getVoltage());
         System.out.println(" - LIMIT REACHED!");
       }
-      return true;
+    }
+    if (holdStage && (Timer.getFPGATimestamp() - timeStamp > Constants.kClimberActiveHoldTIme)) {
+      System.out.println("End of HOLD Stage");
+      return true; // End hold routine after HoldTime expired
     } else {
-      return false;
+      // if (Constants.kDebug){
+      // System.out.print("Hold Time - ");
+      // System.out.format("%.2f",Timer.getFPGATimestamp() - timeStamp);
+      // System.out.println("");
+      // }
+      return false; // keep running
     }
   }
 }

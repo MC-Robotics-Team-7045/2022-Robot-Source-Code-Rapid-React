@@ -9,18 +9,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.ClimberStaticSubsystem;
+import frc.robot.subsystems.DartSubsystem;
 
 import frc.robot.Constants;
 
-public class ClimberStaticExtendCommand extends CommandBase {
-  private final ClimberStaticSubsystem m_Climber;
+public class DartReverseCommand extends CommandBase {
+  private final DartSubsystem m_dart;
 
   // Creates a new ClimberFwdCommand.
 
-  public ClimberStaticExtendCommand(ClimberStaticSubsystem climbervar) {
+  public DartReverseCommand(DartSubsystem climbervar) {
     super();
-    m_Climber = climbervar;
+    m_dart = climbervar;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(climbervar);
@@ -38,19 +38,19 @@ public class ClimberStaticExtendCommand extends CommandBase {
   @Override
   public void execute() {
 
-    m_Climber.up();
+    m_dart.up();
     if (Constants.kDebug) {
-      System.out.print("Static Climber extending - ");
-      System.out.format("%.2f", m_Climber.climberPot.getVoltage());
+      System.out.print("Dart retracting Reverse - ");
+      System.out.format("%.2f", m_dart.dartPot.getVoltage());
       System.out.println("");
     }
     /*
      * //TOGGLE FUnction with no Limits
-     * if (m_Climber.isRunning()){
-     * m_Climber.stop();
+     * if (m_dart.isRunning()){
+     * m_dart.stop();
      * }
      * else{
-     * m_Climber.up();
+     * m_dart.up();
      * }
      */
   }
@@ -58,7 +58,7 @@ public class ClimberStaticExtendCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Climber.stop();
+    m_dart.stop();
     // System.out.println("FClimber-Exec-END");
   }
 
@@ -73,11 +73,11 @@ public class ClimberStaticExtendCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-    if (m_Climber.climberVoltage() < Constants.kClimberStaticExtendedVoltage) { // limit reached
+    if (m_dart.dartVoltage() > Constants.kDartReverseVoltage) { // limit reached
 
       if (Constants.kDebug) {
-        System.out.print("Static Climber extending - ");
-        System.out.format("%.2f", m_Climber.climberPot.getVoltage());
+        System.out.print("Dart retracting Reverse - ");
+        System.out.format("%.2f", m_dart.dartPot.getVoltage());
         System.out.println(" - LIMIT REACHED!");
       }
       return true;
