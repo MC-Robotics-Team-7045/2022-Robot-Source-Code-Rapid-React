@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 
 
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -42,6 +43,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     m_robotContainer.turnOffLimelightLED();
 
+    DriverStation.silenceJoystickConnectionWarning(true);
+  
+ 
+
     //Simple USB CAMERA
     //CameraServer.startAutomaticCapture();
 
@@ -51,6 +56,7 @@ public class Robot extends TimedRobot {
     new Thread(() -> {
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setResolution(320 , 240);
+      camera.setConnectVerbose(0);
 
       CvSink cvSink = CameraServer.getVideo();
       CvSource outputStream = CameraServer.putVideo("Front_Camera", 320, 240);
@@ -71,6 +77,7 @@ public class Robot extends TimedRobot {
     new Thread(() -> {
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setResolution(320 , 240);
+      camera.setConnectVerbose(0);
 
       CvSink cvSink = CameraServer.getVideo();
       CvSource outputStream = CameraServer.putVideo("Upward_Camera", 320, 240);
@@ -104,6 +111,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+
 
     String gameData;
     gameData = DriverStation.getGameSpecificMessage();

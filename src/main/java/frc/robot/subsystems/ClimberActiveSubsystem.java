@@ -57,7 +57,7 @@ public class ClimberActiveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     SmartDashboard.putData("Active Climber String", climberPot);
-    SmartDashboard.putNumber("Active Climber Motor", climberMotor.getAppliedOutput());
+    //SmartDashboard.putNumber("Active Climber Motor", climberMotor.getAppliedOutput());
 
   }
 

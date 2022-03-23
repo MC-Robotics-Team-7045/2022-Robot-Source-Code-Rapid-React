@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
@@ -24,10 +25,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class DartSubsystem extends SubsystemBase {
   private final WPI_TalonSRX dartMotor = new WPI_TalonSRX(Constants.CAN_MOTOR_DART_PORT);
-  // public DigitalInput upperLimit = new
-  // DigitalInput(Constants.dart_UPPER_LIMIT_DIO_PORT);
-  // public DigitalInput lowerLimit = new
-  // DigitalInput(Constants.dart_LOWER_LIMIT_DIO_PORT);
+  
+  //If using Hall Effect seonsors
+  public DigitalInput upperLimit = new DigitalInput(Constants.DART_UPPER_LIMIT_DIO_PORT);
+  public DigitalInput lowerLimit = new DigitalInput(Constants.DART_LOWER_LIMIT_DIO_PORT);
 
   //If using string potentiometer
   public AnalogInput dartPot = new AnalogInput(Constants.DART_POT_PORT);
@@ -42,7 +43,7 @@ public class DartSubsystem extends SubsystemBase {
     dartMotor.setInverted(false);
     dartMotor.setNeutralMode(NeutralMode.Brake);
 
-    //Connect Hall Effect Sensors on Dart to TalonSRX Breakout Limit inpit pins.
+    //Connect external Sensors on Dart to TalonSRX Breakout Limit input pins.
     dartMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
     dartMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
@@ -96,10 +97,12 @@ public class DartSubsystem extends SubsystemBase {
     }
   }
 
+  //Get string potentiometer voltage
   public double dartVoltage() {
     return dartPot.getVoltage();
   }
 
+//If using Limit Switches on Talon SRX breakout board
   public boolean isForwardLimitTriggered(){
     if (dartMotor.isFwdLimitSwitchClosed()==1){
       return true;
@@ -110,6 +113,21 @@ public class DartSubsystem extends SubsystemBase {
 
  public boolean isReverseLimitTriggered(){
     if (dartMotor.isRevLimitSwitchClosed()==1){
+      return true;
+    } else {
+      return false;
+    }
+  } 
+  //If using Hall Effect sonsors on Dart
+  public boolean isUpperHallLimitTriggered(){
+    if (upperLimit.get()==false){
+      return true;
+    } else {
+      return false;
+    }
+  } 
+  public boolean isLowerHallLimitTriggered(){
+    if (lowerLimit.get()==false){
       return true;
     } else {
       return false;

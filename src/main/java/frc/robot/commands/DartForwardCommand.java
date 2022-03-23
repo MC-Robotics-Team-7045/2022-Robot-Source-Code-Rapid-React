@@ -73,28 +73,39 @@ public class DartForwardCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-//UNCOMMENT TO USE STRING POTENTIOMETER    
-//    if (m_dart.dartVoltage() < Constants.kDartForwardVoltage) { // limit reached on POT
-//
-//      if (Constants.kDebug) {
-//        System.out.print("Dart extending forward- ");
-//        System.out.format("%.2f", m_dart.dartPot.getVoltage());
-//        System.out.println(" - LIMIT REACHED!");
-//      }
-//      return true;
-//    } else {
-//      return false;
-//    }
+    // UNCOMMENT TO USE STRING POTENTIOMETER
+    // if (m_dart.dartVoltage() < Constants.kDartForwardVoltage) { // limit reached
+    // on POT
+    //
+    // if (Constants.kDebug) {
+    // System.out.print("Dart extending forward- ");
+    // System.out.format("%.2f", m_dart.dartPot.getVoltage());
+    // System.out.println(" - LIMIT REACHED!");
+    // }
+    // return true;
+    // } else {
+    // return false;
+    // }
 
-   //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev? 
-   if (m_dart.isReverseLimitTriggered()){
-    if (Constants.kDebug) {
-      System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
+    // UNcomment if using on breakout board TALON SRX
+    // Check limit switches on Talon breakout. Possibly mislabled fwd vs rev?
+    // if (m_dart.isReverseLimitTriggered()){
+    // if (Constants.kDebug) {
+    // System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
+    // }
+    // return true;
+    // } else {
+    // return false;
+    // }
+
+    // Uncomment if using Hall
+    if (m_dart.isUpperHallLimitTriggered()) {
+      if (Constants.kDebug) {
+        System.out.println("Dart LIMIT Switch triggered on Upper Hall Effect");
+      }
+      return true;
+    } else {
+      return false;
     }
-     return true;
-   } else {
-     return false;
-   }
-   
   }
 }

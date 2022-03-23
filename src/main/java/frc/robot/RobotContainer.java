@@ -24,14 +24,15 @@ import frc.robot.commands.IndexerRevCommand;
 import frc.robot.commands.ShooterToggleCommand;
 import frc.robot.commands.ShooterPIDDecRPMCommand;
 import frc.robot.commands.ShooterPIDIncRPMCommand;
+//import frc.robot.commands.ClimberStaticCommand;
 import frc.robot.commands.ClimberStaticRetractCommand;
-import frc.robot.commands.DartForwardCommand;
-import frc.robot.commands.DartReverseCommand;
 import frc.robot.commands.ClimberStaticExtendCommand;
 import frc.robot.commands.ClimberActiveRetractCommand;
 import frc.robot.commands.ClimberActiveExtendCommand;
+import frc.robot.commands.DartForwardCommand;
+import frc.robot.commands.DartReverseCommand;
 import frc.robot.commands.AdjustBallCountCommand;
-import frc.robot.subsystems.ColorSubsystem;
+//import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.ClimberActiveSubsystem;
 import frc.robot.subsystems.ClimberStaticSubsystem;
 import frc.robot.subsystems.DartSubsystem;
@@ -70,17 +71,20 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Indexer indexer = new Indexer();
   private final Lidar m_lidar = new Lidar();
-  private final ShooterPID m_shooter = new ShooterPID();
-  private final DartSubsystem m_dart = new DartSubsystem();
   // private final Shooter m_shooter = new Shooter();
+  private final ShooterPID m_shooter = new ShooterPID();
+  private final DartSubsystem m_dart = new DartSubsystem();  
+  private final ClimberStaticSubsystem m_static_climber = new ClimberStaticSubsystem();
+  private final ClimberActiveSubsystem m_active_climber = new ClimberActiveSubsystem();
+
 
   // private final Compressor c_cylinder = new Compressor();
 
   // private final ColorWheelSubsystem m_color_wheel = new ColorWheelSubsystem();
-  private final ColorSubsystem m_color = new ColorSubsystem();
+  
+  //private final ColorSubsystem m_color = new ColorSubsystem();
 
-  private final ClimberStaticSubsystem m_static_climber = new ClimberStaticSubsystem();
-  private final ClimberActiveSubsystem m_active_climber = new ClimberActiveSubsystem();
+
 
   private final CommandBase m_autonomousCommand = new Autonomous(driveTrain, m_lidar, indexer, m_shooter, intake);
 
@@ -92,7 +96,7 @@ public class RobotContainer {
       SmartDashboard.putData(driveTrain);
       SmartDashboard.putData(limeLight);
       SmartDashboard.putData(indexer);
-      SmartDashboard.putData(m_color);
+//      SmartDashboard.putData(m_color);
       SmartDashboard.putData(m_lidar);
       SmartDashboard.putData(intake);
       SmartDashboard.putData(m_shooter);
@@ -102,6 +106,8 @@ public class RobotContainer {
     }
     driveTrain.setDefaultCommand(
         new DriveCommand(driveTrain, () -> -joystick.getY(), () -> joystick.getZ(), () -> -joystick.getThrottle()));
+ 
+        //m_static_climber.setDefaultCommand(new ClimberStaticCommand(m_static_climber, () -> -xbox.getLeftY()));    
 
     // Configure the button bindings
     configureButtonBindings();
@@ -194,5 +200,6 @@ public class RobotContainer {
     m_shooter.stop();
     indexer.stop();
     m_static_climber.stop();
+    m_active_climber.stop();
   }
 }

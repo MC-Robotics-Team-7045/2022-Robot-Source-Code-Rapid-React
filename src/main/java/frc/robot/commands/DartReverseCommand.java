@@ -85,14 +85,26 @@ public class DartReverseCommand extends CommandBase {
 //    } else {
 //      //return false;
 //    }
-     //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev? 
-  if (m_dart.isForwardLimitTriggered()){
-      if (Constants.kDebug) {
-        System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
-      }
-    return true;
-  } else {
-    return false;
-  }
+
+//UNcomment if using on breakout board TALON SRX 
+//     //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev? 
+//  if (m_dart.isForwardLimitTriggered()){
+//      if (Constants.kDebug) {
+//        System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
+//      }
+//    return true;
+//  } else {
+//    return false;
+//  }
+
+//Uncomment if using Hall
+  if (m_dart.isLowerHallLimitTriggered()){
+    if (Constants.kDebug) {
+      System.out.println("Dart LIMIT Switch triggered on Lower Hall Effect");
+    }
+  return true;
+} else {
+  return false;
+}
 }
 }

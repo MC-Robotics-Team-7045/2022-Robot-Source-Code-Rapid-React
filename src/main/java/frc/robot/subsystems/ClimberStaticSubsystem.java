@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Constants;
+
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -22,6 +24,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
  */
 public class ClimberStaticSubsystem extends SubsystemBase {
   private final CANSparkMax climberMotor = new CANSparkMax(Constants.CAN_MOTOR_STATIC_CLIMBER_PORT, MotorType.kBrushless);
+  //private final WPI_TalonSRX climberMotor = new WPI_TalonSRX(Constants.CAN_MOTOR_STATIC_CLIMBER_PORT);
   // public DigitalInput upperLimit = new
   // DigitalInput(Constants.climber_UPPER_LIMIT_DIO_PORT);
   // public DigitalInput lowerLimit = new
@@ -39,15 +42,22 @@ public class ClimberStaticSubsystem extends SubsystemBase {
     if (Constants.kDebug) {
       Shuffleboard.selectTab("Shooter");
       //Shuffleboard.getTab("Shooter").add("Climber Motor", climberMotor).withPosition(3, 1);
-      Shuffleboard.getTab("Shooter").add("Active Climber Voltage", climberPot).withPosition(3, 2);
+      //Shuffleboard.getTab("Shooter").add("Active Climber Voltage", climberPot).withPosition(3, 2);
     }
   }
 
   public void init() {
-
+    //Spark MAX
     climberMotor.restoreFactoryDefaults();
     climberMotor.setInverted(false);
     climberMotor.setIdleMode(IdleMode.kBrake);
+ 
+
+    //TALONX SRX
+     //climberMotor.configFactoryDefault();
+    //climberMotor.setInverted(false);
+    //climberMotor.setIdleMode(IdleMode.kBrake);
+
 
   }
 
@@ -56,8 +66,8 @@ public class ClimberStaticSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     SmartDashboard.putData("Static Climber String", climberPot);
-    SmartDashboard.putNumber("Static Climber Motor", climberMotor.getAppliedOutput());
-
+    //SmartDashboard.putNumber("Static Climber Motor", climberMotor.getAppliedOutput());  //Spark Max
+    //SmartDashboard.putData("Static Climber Motor", climberMotor);  //Talon SRX
   }
 
   // Start the climber motor
