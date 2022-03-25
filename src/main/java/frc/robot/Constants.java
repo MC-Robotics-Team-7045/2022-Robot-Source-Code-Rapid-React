@@ -113,9 +113,12 @@ public final class Constants {
     public static final double kIntakeSpeed = 0.80; // Speed of Intake Motor
 
     // Dart Motor Settings
-    public static final double kDartSpeed = 0.6;
+    public static final double kDartSpeed = 0.65;
     public static final double kDartForwardVoltage = 2.0; //POT Voltage
     public static final double kDartReverseVoltage = 4.0; //POT Voltage
+    public static final int kTimeoutMs = 0;
+    public static final int kPIDLoopIdx = 0;
+    public static final int kSlotIdx = 0;
 
     // Climber Static Motor Settings
     public static final double kClimberStaticSpeed = 0.60; // PWM Speed of Climber Motor

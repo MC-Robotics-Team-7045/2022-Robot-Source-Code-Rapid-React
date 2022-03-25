@@ -42,6 +42,7 @@ public class DartReverseCommand extends CommandBase {
     if (Constants.kDebug) {
       System.out.print("Dart retracting Reverse - ");
       System.out.format("%.2f", m_dart.dartPot.getVoltage());
+      System.out.format(" %d", m_dart.anaPosition);
       System.out.println("");
     }
     /*
@@ -73,38 +74,49 @@ public class DartReverseCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-//UNCOMMENT TO USE STRING POTENTIOMETER   
-//    if (m_dart.dartVoltage() > Constants.kDartReverseVoltage) { // limit reached
+    // UNCOMMENT TO USE STRING POTENTIOMETER
+    // if (m_dart.dartVoltage() > Constants.kDartReverseVoltage) { // limit reached
 
-//      if (Constants.kDebug) {
-//        System.out.print("Dart retracting Reverse - ");
-//        System.out.format("%.2f", m_dart.dartPot.getVoltage());
-//        System.out.println(" - LIMIT REACHED!");
-//      }
-//    return true;
-//    } else {
-//      //return false;
-//    }
+    // if (Constants.kDebug) {
+    // System.out.print("Dart retracting Reverse - ");
+    // System.out.format("%.2f", m_dart.dartPot.getVoltage());
+    // System.out.println(" - LIMIT REACHED!");
+    // }
+    // return true;
+    // } else {
+    // //return false;
+    // }
 
-//UNcomment if using on breakout board TALON SRX 
-//     //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev? 
-//  if (m_dart.isForwardLimitTriggered()){
-//      if (Constants.kDebug) {
-//        System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
-//      }
-//    return true;
-//  } else {
-//    return false;
-//  }
+    // UNcomment if using on breakout board TALON SRX
+    // //Check limit switches on Talon breakout. Possibly mislabled fwd vs rev?
+    // if (m_dart.isForwardLimitTriggered()){
+    // if (Constants.kDebug) {
+    // System.out.println("Dart LIMIT Switch triggered on TalonSRX!");
+    // }
+    // return true;
+    // } else {
+    // return false;
+    // }
 
-//Uncomment if using Hall
-  if (m_dart.isLowerHallLimitTriggered()){
-    if (Constants.kDebug) {
-      System.out.println("Dart LIMIT Switch triggered on Lower Hall Effect");
+    // Uncomment if using Hall
+    if (m_dart.isLowerHallLimitTriggered()) {
+      if (Constants.kDebug) {
+        System.out.println("Dart DIO LIMIT Switch triggered on Lower Hall Effect");
+      }
+      return true;
+    } else {
+      return false;
     }
-  return true;
-} else {
-  return false;
-}
-}
+  }
+
+  // Uncomment if using ANalog via SRX Breakout
+  // if (m_dart.dartPosition() > 800) {
+  // if (Constants.kDebug) {
+  // System.out.println("Dart POSITION >800");
+  // }
+  // return true;
+  // } else {
+  // return false;
+  // }
+  // }
 }

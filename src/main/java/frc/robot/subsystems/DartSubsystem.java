@@ -14,9 +14,11 @@ import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
+//import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
@@ -32,7 +34,7 @@ public class DartSubsystem extends SubsystemBase {
 
   //If using string potentiometer
   public AnalogInput dartPot = new AnalogInput(Constants.DART_POT_PORT);
-
+  public int anaPosition;
   // public Counter m_LIDAR = new Counter(9);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -42,10 +44,30 @@ public class DartSubsystem extends SubsystemBase {
     dartMotor.configFactoryDefault();
     dartMotor.setInverted(false);
     dartMotor.setNeutralMode(NeutralMode.Brake);
+  
 
     //Connect external Sensors on Dart to TalonSRX Breakout Limit input pins.
     dartMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
     dartMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+    dartMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.Analog, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    dartMotor.setSensorPhase(false);
+    		/* Config the peak and nominal outputs, 12V means full */
+		dartMotor.configNominalOutputForward(Constants.kDartSpeed, Constants.kTimeoutMs);
+		dartMotor.configNominalOutputReverse(-Constants.kDartSpeed, Constants.kTimeoutMs);
+		dartMotor.configPeakOutputForward(1, Constants.kTimeoutMs);
+		dartMotor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+
+    dartMotor.configAllowableClosedloopError(0, 0, Constants.kTimeoutMs);
+
+    		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
+        dartMotor.config_kF(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
+        dartMotor.config_kP(Constants.kPIDLoopIdx, 0.15, Constants.kTimeoutMs);
+        dartMotor.config_kI(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
+        dartMotor.config_kD(Constants.kPIDLoopIdx, 1.0, Constants.kTimeoutMs);
+
+    anaPosition = dartMotor.getSensorCollection().getAnalogIn(); 
+    dartMotor.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs) ;
+
 
     // LiveWindow
     // addChild("dart Motor", dartMotor);
@@ -61,25 +83,30 @@ public class DartSubsystem extends SubsystemBase {
     dartMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
     dartMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
+
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    anaPosition = dartMotor.getSensorCollection().getAnalogIn(); 
 
     SmartDashboard.putData("dart String", dartPot);
     SmartDashboard.putData("dart Motor", (Sendable) dartMotor);
+    SmartDashboard.putNumber("Dart_Analong: ",dartMotor.getSensorCollection().getAnalogIn());
 
   }
 
   // Start the dart motor
   public void up() {
     dartMotor.set(Constants.kDartSpeed);
+    //dartMotor.set(ControlMode.Position, 800);
   }
 
   // Reverse the dart motor
   public void down() {
     dartMotor.set(-Constants.kDartSpeed);
+    //dartMotor.set(ControlMode.Position, 650);
   }
 
   // Stops the intake motor
@@ -101,7 +128,9 @@ public class DartSubsystem extends SubsystemBase {
   public double dartVoltage() {
     return dartPot.getVoltage();
   }
-
+  public int dartPosition() {
+    return dartMotor.getSensorCollection().getAnalogIn();
+  }
 //If using Limit Switches on Talon SRX breakout board
   public boolean isForwardLimitTriggered(){
     if (dartMotor.isFwdLimitSwitchClosed()==1){

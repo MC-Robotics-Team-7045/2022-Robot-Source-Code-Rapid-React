@@ -39,9 +39,11 @@ public class DartForwardCommand extends CommandBase {
   public void execute() {
 
     m_dart.up();
+  
     if (Constants.kDebug) {
       System.out.print("Dart extending forward - ");
       System.out.format("%.2f", m_dart.dartPot.getVoltage());
+      System.out.format(" %d",m_dart.anaPosition);
       System.out.println("");
     }
     /*
@@ -101,11 +103,22 @@ public class DartForwardCommand extends CommandBase {
     // Uncomment if using Hall
     if (m_dart.isUpperHallLimitTriggered()) {
       if (Constants.kDebug) {
-        System.out.println("Dart LIMIT Switch triggered on Upper Hall Effect");
+        System.out.println("Dart DIO LIMIT Switch triggered on Upper Hall Effect");
       }
       return true;
     } else {
       return false;
     }
   }
+
+      // Uncomment if using Analog via SRX Breakout
+//      if (m_dart.dartPosition() < 650) {
+//        if (Constants.kDebug) {
+//          System.out.println("Dart POSITION < 650");
+//        }
+//        return true;
+//      } else {
+//        return false;
+//      }
+//    }
 }
