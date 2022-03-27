@@ -15,8 +15,8 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.DriveTrain;
 //import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.Lidar;
-import frc.robot.subsystems.ShooterPID;
-//import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
 //import frc.robot.commands.FireCommand;
 //import frc.robot.commands.LimelightAutoAlign;
@@ -34,7 +34,7 @@ public class Autonomous extends SequentialCommandGroup {
    */
   // public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer
   // indexer, ShooterPID shooter, Intake intake) {
-  public Autonomous(DriveTrain driveTrain, Lidar lidar, Indexer indexer, ShooterPID shooter, Intake intake) {
+  public Autonomous(DriveTrain driveTrain, Lidar lidar, Indexer indexer, Shooter shooter, Intake intake) {
     // public Autonomous(DriveTrain driveTrain, LimeLight limeLight, Indexer
     // indexer, Shooter shooter, Intake intake) {
     // Add your commands in the super() call, e.g.

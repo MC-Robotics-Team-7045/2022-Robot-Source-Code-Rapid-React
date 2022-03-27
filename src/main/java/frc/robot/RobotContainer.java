@@ -22,8 +22,10 @@ import frc.robot.commands.IntakeRevCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IndexerRevCommand;
 import frc.robot.commands.ShooterToggleCommand;
-import frc.robot.commands.ShooterPIDDecRPMCommand;
-import frc.robot.commands.ShooterPIDIncRPMCommand;
+//import frc.robot.commands.ShooterPIDDecRPMCommand;
+//import frc.robot.commands.ShooterPIDIncRPMCommand;
+import frc.robot.commands.ShooterDecRPMCommand;
+import frc.robot.commands.ShooterIncRPMCommand;
 //import frc.robot.commands.ClimberStaticCommand;
 import frc.robot.commands.ClimberStaticRetractCommand;
 import frc.robot.commands.ClimberStaticExtendCommand;
@@ -41,8 +43,8 @@ import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.Lidar;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.ShooterPID;
-//import frc.robot.subsystems.Shooter;  //Plain shooter with no PID
+//import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;  //Plain shooter with no PID
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -71,8 +73,8 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Indexer indexer = new Indexer();
   private final Lidar m_lidar = new Lidar();
-  // private final Shooter m_shooter = new Shooter();
-  private final ShooterPID m_shooter = new ShooterPID();
+  private final Shooter m_shooter = new Shooter();
+  //private final ShooterPID m_shooter = new ShooterPID();
   private final DartSubsystem m_dart = new DartSubsystem();  
   private final ClimberStaticSubsystem m_static_climber = new ClimberStaticSubsystem();
   private final ClimberActiveSubsystem m_active_climber = new ClimberActiveSubsystem();
@@ -165,8 +167,10 @@ public class RobotContainer {
     shooterMotorControl.toggleWhenPressed(new ShooterToggleCommand(m_shooter));
     loadMagazine.whenPressed(new LoadMagazineCommand(intake, indexer));
     firePowerCell.whenPressed(new FireCommand(indexer, m_shooter, intake));
-    incShooterRPM.whenPressed(new ShooterPIDIncRPMCommand(m_shooter)); // POV
-    decShooterRPM.whenPressed(new ShooterPIDDecRPMCommand(m_shooter)); // POV
+//    incShooterRPM.whenPressed(new ShooterPIDIncRPMCommand(m_shooter)); // POV
+//    decShooterRPM.whenPressed(new ShooterPIDDecRPMCommand(m_shooter)); // POV
+    incShooterRPM.whenPressed(new ShooterIncRPMCommand(m_shooter)); // POV
+    decShooterRPM.whenPressed(new ShooterDecRPMCommand(m_shooter)); // POV
     staticClimberUp.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));
     staticClimberDown.toggleWhenPressed(new ClimberStaticRetractCommand(m_static_climber));
     staticClimberUpXbox.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));

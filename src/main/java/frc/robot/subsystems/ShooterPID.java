@@ -17,6 +17,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+///////////////////////////////////////////////////////////////////////////////////
+//NEED TO REWRITE PID CONTROLS TO USE CAN BASED CONTROLLER
+//CONSIDER WIRING SHOOTER ENCODER DIRECTLY TO TALON-SRX BREAKOUT BOARD
+//SEE CTRE TALON VELOCITY CONTROL PID EXAMPLE
+
 /**
  * Add your docs here.
  */
@@ -37,8 +42,9 @@ public class ShooterPID extends PIDSubsystem {
     getController().setTolerance(Constants.kShooterToleranceRPS);
     shooterEncoder.setDistancePerPulse(Constants.kShooterEncoderDistancePerPulse);
     setSetpoint(Constants.kShooterTargetRPS);
+
     shooterMotor.configFactoryDefault();
-    shooterMotor.setInverted(false);
+    shooterMotor.setInverted(true);
     shooterMotor.setNeutralMode(NeutralMode.Coast);
 
 
@@ -55,11 +61,8 @@ public class ShooterPID extends PIDSubsystem {
   }
   public void init() {
 
-    shooterMotor.configFactoryDefault();
-    shooterMotor.setInverted(false);
-    shooterMotor.setNeutralMode(NeutralMode.Coast);
-
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

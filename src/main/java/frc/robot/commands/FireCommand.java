@@ -11,14 +11,14 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.ShooterPID;
-//import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
 public class FireCommand extends CommandBase {
-  private final ShooterPID m_shooter;
-  // private final Shooter m_shooter;
+  //private final ShooterPID m_shooter;
+  private final Shooter m_shooter;
   private final Indexer m_indexer;
   private final Intake m_intake;
   private static boolean lastState;
@@ -30,8 +30,8 @@ public class FireCommand extends CommandBase {
   /**
    * Creates a new FireCommand.
    */
-  public FireCommand(Indexer indexer, ShooterPID shooter, Intake intake) {
-    // public FireCommand(Indexer indexer, Shooter shooter, Intake intake) {
+  //public FireCommand(Indexer indexer, ShooterPID shooter, Intake intake) {
+  public FireCommand(Indexer indexer, Shooter shooter, Intake intake) {
     super();
     m_shooter = shooter;
     m_indexer = indexer;

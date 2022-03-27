@@ -8,18 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterPID;
-
-//import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;
 //Toggle SHooter Motor ON or OFF
 public class ShooterStopCommand extends CommandBase {
-  private final ShooterPID m_shooter;
-  // private final Shooter m_shooter;
+  //private final ShooterPID m_shooter;
+  private final Shooter m_shooter;
 
   // Creates a new ShooterCommand.
 
-  public ShooterStopCommand(ShooterPID shooter) {
-    // public ShooterStopCommand(Shooter shooter) {
+  //public ShooterStopCommand(ShooterPID shooter) {
+  public ShooterStopCommand(Shooter shooter) {
     super();
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.

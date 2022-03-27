@@ -9,18 +9,17 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterPID;
-
-//import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;
 //Toggle SHooter Motor ON or OFF
 public class ShooterToggleCommand extends CommandBase {
-  private final ShooterPID m_shooter;
-  // private final Shooter m_shooter;
+  //private final ShooterPID m_shooter;
+  private final Shooter m_shooter;
 
   // Creates a new ShooterCommand.
 
-  public ShooterToggleCommand(ShooterPID shooter) {
-    // public ShooterToggleCommand(Shooter shooter) {
+  //public ShooterToggleCommand(ShooterPID shooter) {
+  public ShooterToggleCommand(Shooter shooter) {
     super();
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -37,6 +36,7 @@ public class ShooterToggleCommand extends CommandBase {
   @Override
   public void execute() {
     if (m_shooter.isRunning()) {
+
       m_shooter.disable();
 
       if (Constants.kDebug) {
@@ -44,6 +44,7 @@ public class ShooterToggleCommand extends CommandBase {
       }
 
     } else {
+
       m_shooter.enable();
 
       if (Constants.kDebug) {

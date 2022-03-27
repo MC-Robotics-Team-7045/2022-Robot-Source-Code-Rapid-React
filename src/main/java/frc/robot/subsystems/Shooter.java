@@ -12,7 +12,10 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -22,12 +25,17 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 public class Shooter extends SubsystemBase {
   private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_SHOOTER_PORT);
   public static double overrideShooterSpeed = Constants.kShooterSpeed; //Set initial vale
-
+  private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A,
+  Constants.SHOOTER_ENCODER_DIO_PORT_B);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Shooter(){
     //super();
     super();
+
+    shooterMotor.configFactoryDefault();
+    shooterMotor.setInverted(true);
+    shooterMotor.setNeutralMode(NeutralMode.Coast);
     
     //LiveWindow
     Shuffleboard.selectTab("Shooter");
@@ -40,12 +48,16 @@ public class Shooter extends SubsystemBase {
 
   }
   public void init() {
-
-    shooterMotor.configFactoryDefault();
-    shooterMotor.setInverted(false);
-    shooterMotor.setNeutralMode(NeutralMode.Coast);
-
   }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+
+    SmartDashboard.putData("Shooter Motor", shooterMotor);
+    SmartDashboard.putNumber("Shooter Encoder", shooterEncoder.getRate());
+  }
+
    //Start the intake motor //TEST
    public void start() {
     //shooterMotor.set(Constants.kShooterSpeed);

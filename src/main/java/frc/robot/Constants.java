@@ -148,7 +148,7 @@ public final class Constants {
 
     // Shooter Constants
     // Non-PID Shooter - fixed input
-    public static final double kShooterSpeed = .15; // was 0.65 Fixed spped input 0-1
+    public static final double kShooterSpeed = .25; // was 0.65 Fixed spped input 0-1
     // PID Values
     public static final double kShooter_P = .1;
     public static final double kShooter_I = 0;
