@@ -41,13 +41,16 @@ public class ClimberActiveSubsystem extends SubsystemBase {
       Shuffleboard.selectTab("Shooter");
 //      Shuffleboard.getTab("Shooter").add("Climber Motor", climberMotor).withPosition(3, 1);
       Shuffleboard.getTab("Shooter").add("Climber Voltage", climberPot).withPosition(3, 2);
+      climberMotor.restoreFactoryDefaults();
+      climberMotor.setInverted(true);
+      climberMotor.setIdleMode(IdleMode.kBrake);
     }
   }
 
   public void init() {
 
     climberMotor.restoreFactoryDefaults();
-    climberMotor.setInverted(false);
+    climberMotor.setInverted(true);
     climberMotor.setIdleMode(IdleMode.kBrake);
 
   }

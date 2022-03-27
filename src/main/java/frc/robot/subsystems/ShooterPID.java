@@ -37,6 +37,10 @@ public class ShooterPID extends PIDSubsystem {
     getController().setTolerance(Constants.kShooterToleranceRPS);
     shooterEncoder.setDistancePerPulse(Constants.kShooterEncoderDistancePerPulse);
     setSetpoint(Constants.kShooterTargetRPS);
+    shooterMotor.configFactoryDefault();
+    shooterMotor.setInverted(false);
+    shooterMotor.setNeutralMode(NeutralMode.Coast);
+
 
     // LiveWindow
     Shuffleboard.selectTab("Shooter");

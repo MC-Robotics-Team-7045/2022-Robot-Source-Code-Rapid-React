@@ -49,7 +49,7 @@ public class ClimberStaticSubsystem extends SubsystemBase {
   public void init() {
     //Spark MAX
     climberMotor.restoreFactoryDefaults();
-    climberMotor.setInverted(false);
+    climberMotor.setInverted(true);
     climberMotor.setIdleMode(IdleMode.kBrake);
  
 

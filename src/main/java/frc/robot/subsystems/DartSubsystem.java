@@ -30,6 +30,7 @@ public class DartSubsystem extends SubsystemBase {
   
   //If using Hall Effect seonsors
   public DigitalInput upperLimit = new DigitalInput(Constants.DART_UPPER_LIMIT_DIO_PORT);
+  public DigitalInput midLimit = new DigitalInput(Constants.DART_MID_UPPER_LIMIT_DIO_PORT);
   public DigitalInput lowerLimit = new DigitalInput(Constants.DART_LOWER_LIMIT_DIO_PORT);
 
   //If using string potentiometer
@@ -157,6 +158,13 @@ public class DartSubsystem extends SubsystemBase {
   } 
   public boolean isLowerHallLimitTriggered(){
     if (lowerLimit.get()==false){
+      return true;
+    } else {
+      return false;
+    }
+  } 
+  public boolean isMidHallLimitTriggered(){
+    if (midLimit.get()==false){
       return true;
     } else {
       return false;

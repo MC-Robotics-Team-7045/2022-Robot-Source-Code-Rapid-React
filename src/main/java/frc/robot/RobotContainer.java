@@ -105,7 +105,7 @@ public class RobotContainer {
       //SmartDashboard.putData(m_active_climber);
     }
     driveTrain.setDefaultCommand(
-        new DriveCommand(driveTrain, () -> -joystick.getY(), () -> joystick.getZ(), () -> -joystick.getThrottle()));
+        new DriveCommand(driveTrain, () -> -joystick.getY(), () -> -joystick.getZ(), () -> -joystick.getThrottle()));
  
         //m_static_climber.setDefaultCommand(new ClimberStaticCommand(m_static_climber, () -> -xbox.getLeftY()));    
 

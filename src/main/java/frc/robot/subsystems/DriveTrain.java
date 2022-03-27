@@ -44,8 +44,8 @@ public class DriveTrain extends SubsystemBase {
     motorRightFront.setIdleMode(IdleMode.kBrake);
     motorRightRear.setIdleMode(IdleMode.kBrake);
 
-    motorLeftFront.setInverted(false);
-    motorRightFront.setInverted(true); //arcade drive takes care of inversion?
+    motorLeftFront.setInverted(true);
+    motorRightFront.setInverted(false); //arcade drive takes care of inversion?
     //motorLeftRear.setInverted(false; //set as follower
     //motorRightRear.setInverted(true);
 

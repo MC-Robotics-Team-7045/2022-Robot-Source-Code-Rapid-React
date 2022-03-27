@@ -28,11 +28,11 @@ public final class Constants {
     public static final int CAN_MOTOR_LEFT_REAR_PORT = 31;   // SparkMAX with NEO Brushless
     public static final int CAN_MOTOR_RIGHT_FRONT_PORT = 32; // SparkMAX with NEO Brushless
     public static final int CAN_MOTOR_RIGHT_REAR_PORT = 33;  // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_INTAKE_PORT = 10; // A
-    public static final int CAN_MOTOR_INDEXER_PORT = 13; // D
+    public static final int CAN_MOTOR_INTAKE_PORT = 16; // G
+    public static final int CAN_MOTOR_INDEXER_PORT = 10; // A
     public static final int CAN_MOTOR_SHOOTER_PORT = 17; // H
-    public static final int CAN_MOTOR_STATIC_CLIMBER_PORT = 34;  //34   // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_ACTIVE_CLIMBER_PORT = 35;     // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_STATIC_CLIMBER_PORT = 35;  //34   // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_ACTIVE_CLIMBER_PORT = 34;     // SparkMAX with NEO Brushless
     public static final int CAN_MOTOR_DART_PORT = 41; //41    // TalonSRX
     // ANalog INput
     public static final int CLIMBER_STATIC_POT_PORT = 3;
@@ -67,12 +67,14 @@ public final class Constants {
     public static final int xboxRStickButton = 10;
 
     // DIO Ports
-    public static final int LIDAR_DIO_PORT = 7;
 
     public static final int SHOOTER_ENCODER_DIO_PORT_A = 8; // Reversed B? //Yellow=Signal Orange=+5V
     public static final int SHOOTER_ENCODER_DIO_PORT_B = 9; // Blue Wire=Signal, black=Ground
-    public static final int DART_UPPER_LIMIT_DIO_PORT = 4;
-    public static final int DART_LOWER_LIMIT_DIO_PORT = 5;
+    public static final int LIDAR_DIO_PORT = 7;
+    public static final int DART_UPPER_LIMIT_DIO_PORT = 6;
+    public static final int DART_MID_UPPER_LIMIT_DIO_PORT = 5;
+    public static final int DART_MID_LOWER_LIMIT_DIO_PORT = 4;
+    public static final int DART_LOWER_LIMIT_DIO_PORT = 3;
 
     public static final int SWITCH_S1_SHOOTER_DIO_PORT = 2;
     public static final int SWITCH_S2_MID_INDEX_DIO_PORT = 1;
@@ -124,8 +126,8 @@ public final class Constants {
     public static final double kClimberStaticSpeed = 0.60; // PWM Speed of Climber Motor
     public static final double kClimberStaticHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberStaticHoldSpeed = 0.15; // PWM Speed during "hold" period
-    public static final double kClimberStaticRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
-    public static final double kClimberStaticExtendedVoltage = 2; // Set point for Climber POT when extended
+    public static final double kClimberStaticRetractedVoltage = 4.3; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberStaticExtendedVoltage = 1.9; // Set point for Climber POT when extended
     // Climber Active Motor Settings
     public static final double kClimberActiveSpeed = 0.60; // PWM Speed of Climber Motor
     public static final double kClimberActiveHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
@@ -146,7 +148,7 @@ public final class Constants {
 
     // Shooter Constants
     // Non-PID Shooter - fixed input
-    public static final double kShooterSpeed = .65; // was 0.65 Fixed spped input 0-1
+    public static final double kShooterSpeed = .15; // was 0.65 Fixed spped input 0-1
     // PID Values
     public static final double kShooter_P = .1;
     public static final double kShooter_I = 0;
