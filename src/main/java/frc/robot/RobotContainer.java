@@ -171,17 +171,15 @@ public class RobotContainer {
 //    decShooterRPM.whenPressed(new ShooterPIDDecRPMCommand(m_shooter)); // POV
     incShooterRPM.whenPressed(new ShooterIncRPMCommand(m_shooter)); // POV
     decShooterRPM.whenPressed(new ShooterDecRPMCommand(m_shooter)); // POV
-    staticClimberUp.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));
-    staticClimberDown.toggleWhenPressed(new ClimberStaticRetractCommand(m_static_climber));
-    staticClimberUpXbox.toggleWhenPressed(new ClimberStaticExtendCommand(m_static_climber));
-    staticClimberDownXbox.toggleWhenPressed(new ClimberStaticRetractCommand(m_static_climber));
-    buttonYELLOW.toggleWhenPressed(new ClimberActiveExtendCommand(m_active_climber));
-    buttonGREEN.toggleWhenPressed(new ClimberActiveRetractCommand(m_active_climber));
-    buttonBLUE.toggleWhenPressed(new DartReverseCommand(m_dart));
-    buttonRED.toggleWhenPressed(new DartForwardCommand(m_dart));
+    staticClimberUp.whenHeld(new ClimberStaticExtendCommand(m_static_climber));
+    staticClimberDown.whenHeld(new ClimberStaticRetractCommand(m_static_climber));
+    staticClimberUpXbox.whenHeld(new ClimberStaticExtendCommand(m_static_climber));
+    staticClimberDownXbox.whenHeld(new ClimberStaticRetractCommand(m_static_climber));
+    buttonYELLOW.whenHeld(new ClimberActiveExtendCommand(m_active_climber));
+    buttonGREEN.whenHeld(new ClimberActiveRetractCommand(m_active_climber));
+    buttonBLUE.whenHeld(new DartReverseCommand(m_dart));
+    buttonRED.whenHeld(new DartForwardCommand(m_dart));
     adjustBallCount.toggleWhenPressed(new AdjustBallCountCommand(indexer));
-
-
   }
 
   /**

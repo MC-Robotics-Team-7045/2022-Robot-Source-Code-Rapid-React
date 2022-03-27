@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.robot.subsystems.DartSubsystem;
 
 import frc.robot.Constants;
@@ -61,6 +60,7 @@ public class DartForwardCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_dart.stop();
+    
     // System.out.println("FClimber-Exec-END");
   }
 
@@ -105,8 +105,10 @@ public class DartForwardCommand extends CommandBase {
       if (Constants.kDebug) {
         System.out.println("Dart DIO LIMIT Switch triggered on Upper Hall Effect");
       }
+
       return true;
     } else {
+
       return false;
     }
   }

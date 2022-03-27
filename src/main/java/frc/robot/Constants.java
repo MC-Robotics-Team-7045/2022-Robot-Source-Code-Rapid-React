@@ -115,7 +115,7 @@ public final class Constants {
     public static final double kIntakeSpeed = 0.80; // Speed of Intake Motor
 
     // Dart Motor Settings
-    public static final double kDartSpeed = 0.65;
+    public static final double kDartSpeed = 0.40; //  was .65
     public static final double kDartForwardVoltage = 2.0; //POT Voltage
     public static final double kDartReverseVoltage = 4.0; //POT Voltage
     public static final int kTimeoutMs = 0;
@@ -123,17 +123,17 @@ public final class Constants {
     public static final int kSlotIdx = 0;
 
     // Climber Static Motor Settings
-    public static final double kClimberStaticSpeed = 0.60; // PWM Speed of Climber Motor
+    public static final double kClimberStaticSpeed = 0.40; // PWM Speed of Climber Motor
     public static final double kClimberStaticHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberStaticHoldSpeed = 0.15; // PWM Speed during "hold" period
-    public static final double kClimberStaticRetractedVoltage = 4.3; // POT Voltage when climber fully retracted (down)
-    public static final double kClimberStaticExtendedVoltage = 1.9; // Set point for Climber POT when extended
+    public static final double kClimberStaticRetractedVoltage = 4.22; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberStaticExtendedVoltage = 1.85; // Set point for Climber POT when extended
     // Climber Active Motor Settings
-    public static final double kClimberActiveSpeed = 0.60; // PWM Speed of Climber Motor
+    public static final double kClimberActiveSpeed = 0.40; // PWM Speed of Climber Motor
     public static final double kClimberActiveHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberActiveHoldSpeed = 0.15; // PWM Speed during "hold" period
-    public static final double kClimberActiveRetractedVoltage = 4; // POT Voltage when climber fully retracted (down)
-    public static final double kClimberActiveExtendedVoltage = 2; // Set point for Climber POT when extended
+    public static final double kClimberActiveRetractedVoltage = 4.0; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberActiveExtendedVoltage = 1.3; // Set point for Climber POT when extended
 
     // Indexer Encoder
 
@@ -148,7 +148,7 @@ public final class Constants {
 
     // Shooter Constants
     // Non-PID Shooter - fixed input
-    public static final double kShooterSpeed = .25; // was 0.65 Fixed spped input 0-1
+    public static final double kShooterSpeed = .65; // was 0.65 Fixed spped input 0-1
     // PID Values
     public static final double kShooter_P = .1;
     public static final double kShooter_I = 0;
