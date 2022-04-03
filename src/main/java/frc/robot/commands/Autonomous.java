@@ -54,10 +54,34 @@ public class Autonomous extends SequentialCommandGroup {
         new WaitCommand(2),
 
         new ShooterStopCommand(shooter),
-        new DriveCommand(driveTrain, () -> -Math.abs(0.6), () -> Math.abs(0.0), () -> Math.abs(0.8)),
-        new WaitCommand(2),
-        new DriveCommand(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
+        new DriveCommandAuto(driveTrain, () -> -Math.abs(0.45), () -> Math.abs(0.0), () -> Math.abs(0.6)),
+        new WaitCommand(1.75),
+        new DriveCommandAuto(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
 
     );
-  }
+//    addCommands(
+//      new ShooterToggleCommand(shooter),
+//      // new LidarAutoAlign(driveTrain, lidar, move, turn),
+//      new WaitCommand(3),
+//      new FireCommand(indexer, shooter, intake),
+//      new WaitCommand(2),
+//      new ShooterStopCommand(shooter));
+
+//    timeStamp = Timer.getFPGATimestamp();
+//
+//    addCommands(
+         
+ //     new DriveCommand(driveTrain, () -> -Math.abs(0.45), () -> Math.abs(0.0), () -> Math.abs(0.6))
+ //   );
+
+ //     if (Timer.getFPGATimestamp() - timeStamp > 1.75) {
+        
+ //     }
+  
+
+ //     new DriveCommand(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
+
+
+
+}
 }

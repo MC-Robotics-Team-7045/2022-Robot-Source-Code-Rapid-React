@@ -63,7 +63,8 @@ public class ClimberActiveSubsystem extends SubsystemBase {
 
   // Start the climber motor
   public void up() {
-    climberMotor.set(Constants.kClimberActiveSpeed);
+  //  climberMotor.set(Constants.kClimberActiveSpeed);
+    climberMotor.set(.85);
   }
 
   // Reverse the climber motor

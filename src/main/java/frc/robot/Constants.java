@@ -115,7 +115,7 @@ public final class Constants {
     public static final double kIntakeSpeed = 0.80; // Speed of Intake Motor
 
     // Dart Motor Settings
-    public static final double kDartSpeed = 0.40; //  was .65
+    public static final double kDartSpeed = 0.65; //  was .65
     public static final double kDartForwardVoltage = 2.0; //POT Voltage
     public static final double kDartReverseVoltage = 4.0; //POT Voltage
     public static final int kTimeoutMs = 0;
@@ -123,13 +123,13 @@ public final class Constants {
     public static final int kSlotIdx = 0;
 
     // Climber Static Motor Settings
-    public static final double kClimberStaticSpeed = 0.40; // PWM Speed of Climber Motor
+    public static final double kClimberStaticSpeed = 0.65; // PWM Speed of Climber Motor
     public static final double kClimberStaticHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberStaticHoldSpeed = 0.15; // PWM Speed during "hold" period
     public static final double kClimberStaticRetractedVoltage = 4.22; // POT Voltage when climber fully retracted (down)
     public static final double kClimberStaticExtendedVoltage = 1.85; // Set point for Climber POT when extended
     // Climber Active Motor Settings
-    public static final double kClimberActiveSpeed = 0.40; // PWM Speed of Climber Motor
+    public static final double kClimberActiveSpeed = 0.65; // PWM Speed of Climber Motor
     public static final double kClimberActiveHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberActiveHoldSpeed = 0.15; // PWM Speed during "hold" period
     public static final double kClimberActiveRetractedVoltage = 4.0; // POT Voltage when climber fully retracted (down)
