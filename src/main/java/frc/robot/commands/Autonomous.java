@@ -55,7 +55,7 @@ public class Autonomous extends SequentialCommandGroup {
 
         new ShooterStopCommand(shooter),
         new DriveCommandAuto(driveTrain, () -> -Math.abs(0.45), () -> Math.abs(0.0), () -> Math.abs(0.6)),
-        new WaitCommand(1.75),
+        new WaitCommand(5),
         new DriveCommandAuto(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
 
     );

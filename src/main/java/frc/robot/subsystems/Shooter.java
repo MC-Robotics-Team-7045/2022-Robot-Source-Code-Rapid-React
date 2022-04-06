@@ -17,13 +17,14 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 /**
  * Add your docs here.
  */
 public class Shooter extends SubsystemBase {
-  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_SHOOTER_PORT);
+  private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(Constants.CAN_MOTOR_SHOOTER_PORT);
   public static double overrideShooterSpeed = Constants.kShooterSpeed; //Set initial vale
   private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A,
   Constants.SHOOTER_ENCODER_DIO_PORT_B);

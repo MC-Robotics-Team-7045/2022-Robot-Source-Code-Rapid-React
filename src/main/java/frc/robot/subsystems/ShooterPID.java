@@ -16,8 +16,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-///////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 //NEED TO REWRITE PID CONTROLS TO USE CAN BASED CONTROLLER
 //CONSIDER WIRING SHOOTER ENCODER DIRECTLY TO TALON-SRX BREAKOUT BOARD
 //SEE CTRE TALON VELOCITY CONTROL PID EXAMPLE
@@ -26,7 +27,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
  * Add your docs here.
  */
 public class ShooterPID extends PIDSubsystem {
-  private final WPI_VictorSPX shooterMotor = new WPI_VictorSPX(Constants.CAN_MOTOR_SHOOTER_PORT);
+  private final TalonSRX shooterMotor = new TalonSRX(Constants.CAN_MOTOR_SHOOTER_PORT);
   private final Encoder shooterEncoder = new Encoder(Constants.SHOOTER_ENCODER_DIO_PORT_A,
       Constants.SHOOTER_ENCODER_DIO_PORT_B);
   private final SimpleMotorFeedforward shooterFeedforward = new SimpleMotorFeedforward(Constants.kSVolts,
@@ -67,7 +68,7 @@ public class ShooterPID extends PIDSubsystem {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    SmartDashboard.putData("Shooter Motor", shooterMotor);
+    //SmartDashboard.putData("Shooter Motor", shooterMotor);
     SmartDashboard.putNumber("Shooter Setpoint", overrideShooterSpeed);
     SmartDashboard.putBoolean("Shooter Ready", m_controller.atSetpoint());
   }
@@ -79,7 +80,7 @@ public class ShooterPID extends PIDSubsystem {
 
   @Override
   public void useOutput(double output, double setpoint) {
-    shooterMotor.setVoltage(output + shooterFeedforward.calculate(setpoint));
+    //shooterMotor.setVoltage(output + shooterFeedforward.calculate(setpoint));
 
     System.out.printf("Output: %.3f   newset: %.3f     getRate: %.2f    AtSet: %b", output,
         output + shooterFeedforward.calculate(setpoint), shooterEncoder.getRate(), m_controller.atSetpoint());
@@ -101,7 +102,7 @@ public class ShooterPID extends PIDSubsystem {
   // Stops the Shooter motor
 
   public void stop() {
-    shooterMotor.set(0);
+    //shooterMotor.set(0);
   }
 
   /**
@@ -109,10 +110,10 @@ public class ShooterPID extends PIDSubsystem {
    */
   public boolean isRunning() {
 
-    if (Math.abs(shooterMotor.get()) > 0.0) {
-      return true;
-    } else {
+//    if (Math.abs(shooterMotor.get()) > 0.0) {
+//      return true;
+//    } else {
       return false;
-    }
+//    }
   }
 }

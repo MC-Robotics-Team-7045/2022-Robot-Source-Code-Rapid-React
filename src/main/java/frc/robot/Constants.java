@@ -24,16 +24,16 @@ public final class Constants {
     public static final boolean kDebug = true;
 
     //CAN Bus Device IDs
-    public static final int CAN_MOTOR_LEFT_FRONT_PORT = 30;  // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_LEFT_REAR_PORT = 31;   // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_RIGHT_FRONT_PORT = 32; // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_RIGHT_REAR_PORT = 33;  // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_LEFT_FRONT_PORT = 30;      // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_LEFT_REAR_PORT = 31;       // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_RIGHT_FRONT_PORT = 32;     // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_RIGHT_REAR_PORT = 33;      // SparkMAX with NEO Brushless
     public static final int CAN_MOTOR_INTAKE_PORT = 16; // G
     public static final int CAN_MOTOR_INDEXER_PORT = 10; // A
-    public static final int CAN_MOTOR_SHOOTER_PORT = 17; // H
-    public static final int CAN_MOTOR_STATIC_CLIMBER_PORT = 35;  //34   // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_ACTIVE_CLIMBER_PORT = 34;     // SparkMAX with NEO Brushless
-    public static final int CAN_MOTOR_DART_PORT = 41; //41    // TalonSRX
+    public static final int CAN_MOTOR_SHOOTER_PORT = 40;         // TalonSRX
+    public static final int CAN_MOTOR_STATIC_CLIMBER_PORT = 35;  // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_ACTIVE_CLIMBER_PORT = 34;  // SparkMAX with NEO Brushless
+    public static final int CAN_MOTOR_DART_PORT = 41; //41       // TalonSRX
     // ANalog INput
     public static final int CLIMBER_STATIC_POT_PORT = 3;
     public static final int CLIMBER_ACTIVE_POT_PORT = 2;
