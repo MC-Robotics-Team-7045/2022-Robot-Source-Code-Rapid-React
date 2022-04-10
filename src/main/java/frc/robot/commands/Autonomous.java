@@ -48,14 +48,18 @@ public class Autonomous extends SequentialCommandGroup {
 
     addCommands(
         new ShooterToggleCommand(shooter),
+        new DriveCommandAuto(driveTrain, () -> -Math.abs(0.45), () -> Math.abs(0.0), () -> Math.abs(0.6)),
+        new WaitCommand(1.0),
+        new DriveCommandAuto(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8)),
+
         // new LidarAutoAlign(driveTrain, lidar, move, turn),
-        new WaitCommand(3),
+        new WaitCommand(2.0),
         new FireCommand(indexer, shooter, intake),
         new WaitCommand(2),
 
         new ShooterStopCommand(shooter),
         new DriveCommandAuto(driveTrain, () -> -Math.abs(0.45), () -> Math.abs(0.0), () -> Math.abs(0.6)),
-        new WaitCommand(5),
+        new WaitCommand(3.0),
         new DriveCommandAuto(driveTrain, () -> -Math.abs(0.0), () -> Math.abs(0.0), () -> Math.abs(0.8))
 
     );

@@ -73,16 +73,16 @@ public class ClimberStaticExtendCommand extends CommandBase {
   public boolean isFinished() {
 
     // Voltage drops as string extends. 0" is approx 4.8V. Full extension < 1V
-  //  if (m_Climber.climberVoltage() < Constants.kClimberStaticExtendedVoltage) { // limit reached
-//
-//      if (Constants.kDebug) {
-//        System.out.print("Static Climber extending - ");
-//        System.out.format("%.2f", m_Climber.climberPot.getVoltage());
-//        System.out.println(" - LIMIT REACHED!");
-//      }
- //     return true;
-//    } else {
+  if (m_Climber.climberVoltage() < Constants.kClimberStaticExtendedVoltage) { // limit reached
+
+      if (Constants.kDebug) {
+        System.out.print("Static Climber extending - ");
+        System.out.format("%.2f", m_Climber.climberPot.getVoltage());
+        System.out.println(" - LIMIT REACHED!");
+      }
+     return true;
+    } else {
       return false;
-//    }
+    }
   }
 }

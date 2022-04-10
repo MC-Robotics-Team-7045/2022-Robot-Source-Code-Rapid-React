@@ -102,7 +102,8 @@ public class LimelightAutoAlign extends CommandBase {
       System.out.println(ty);
       // m_driveTrain.targetDrive(m_move.getAsDouble(), turnAlign,
       // m_throttle.getAsDouble());
-      m_driveTrain.targetDrive(moveAlign, turnAlign, m_throttle.getAsDouble());
+      //m_driveTrain.targetDrive(moveAlign, turnAlign, m_throttle.getAsDouble());
+      m_driveTrain.targetDrive(0.0, turnAlign, m_throttle.getAsDouble());
       // System.out.println("LL-Execute");
 
     } // isTarget

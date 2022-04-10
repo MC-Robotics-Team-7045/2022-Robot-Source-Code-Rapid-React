@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.FireCommand;
-//import frc.robot.commands.LimelightAutoAlign;
-import frc.robot.commands.LidarAutoAlign;
+import frc.robot.commands.LimelightAutoAlign;
+//import frc.robot.commands.LidarAutoAlign;
 import frc.robot.commands.LoadMagazineCommand;
 import frc.robot.commands.IntakeFwdCommand;
 import frc.robot.commands.IntakeRevCommand;
@@ -157,9 +157,8 @@ public class RobotContainer {
     //final JoystickButton buttonRB = new JoystickButton(xbox, Constants.joystickRBButton);
 
     // Joystick COmmands
-    // aim.whileHeld(new LimelightAutoAlign(driveTrain, limeLight, () ->
-    // -joystick.getY(), () -> -joystick.getThrottle()));
-    aim.whileHeld(new LidarAutoAlign(driveTrain, m_lidar, () -> -joystick.getY(), () -> -joystick.getThrottle()));
+    aim.whileHeld(new LimelightAutoAlign(driveTrain, limeLight, () ->-joystick.getY(), () -> -joystick.getThrottle()));
+    //aim.whileHeld(new LidarAutoAlign(driveTrain, m_lidar, () -> -joystick.getY(), () -> -joystick.getThrottle()));
     intakeFwd.toggleWhenPressed(new IntakeFwdCommand(intake));
     intakeRev.toggleWhenPressed(new IntakeRevCommand(intake));
     indexAdv.toggleWhenPressed(new IndexerCommand(indexer));

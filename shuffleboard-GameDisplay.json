@@ -263,6 +263,17 @@
               "Visuals/Orientation": "HORIZONTAL",
               "Visuals/Number of tick marks": 5
             }
+          },
+          "12,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Dart_Analong: ",
+              "_title": "Dart_Analong: "
+            }
           }
         }
       }
@@ -404,6 +415,32 @@
                   "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [17]",
                   "_title": "Victor SPX [17]",
                   "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [40]",
+                  "_title": "LiveWindow/Ungrouped/Talon SRX [40]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [16]",
+                  "_title": "LiveWindow/Ungrouped/Victor SPX [16]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[5]/Value",
+                  "_title": "LiveWindow/Ungrouped/DigitalInput[5]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
+                  "_title": "LiveWindow/Ungrouped/DigitalInput[3]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }

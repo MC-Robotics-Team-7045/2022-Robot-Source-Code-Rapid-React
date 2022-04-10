@@ -99,11 +99,11 @@ public final class Constants {
     public static final double kTargetMoveMinThreshold = 0.4;
 
     public static final double kTargetTurn = 0.03; // scaling constant
-    public static final double kTargetTurnMax = 0.4; // Squared result(~.16) Max turn speed during target acquisition
+    public static final double kTargetTurnMax = 0.5; // Squared result(~.16) Max turn speed during target acquisition
     public static final double kTargetTurnMinThreshold = 0.3;
 
-    public static final double kMinXTargetOffset = 2.5; // Min offset angle to be on target
-    public static final double kMinYTargetOffset = 0.5; // Min offset angle to be on target
+    public static final double kMinXTargetOffset = 0.6; // Min offset angle to be on target
+    public static final double kMinYTargetOffset = 0.05; // Min offset angle to be on target
 
     // LIDAR Settings
     public static final double LidarOffset = 8; // CM?
@@ -123,15 +123,15 @@ public final class Constants {
     public static final int kSlotIdx = 0;
 
     // Climber Static Motor Settings
-    public static final double kClimberStaticUpSpeed = 0.85; // PWM Speed of Climber Motor
-    public static final double kClimberStaticDownSpeed = 0.65; // PWM Speed of Climber Motor
+    public static final double kClimberStaticUpSpeed = 0.90; // PWM Speed of Climber Motor
+    public static final double kClimberStaticDownSpeed = 0.70; // PWM Speed of Climber Motor
     public static final double kClimberStaticHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberStaticHoldSpeed = 0.15; // PWM Speed during "hold" period
-    public static final double kClimberStaticRetractedVoltage = 4.22; // POT Voltage when climber fully retracted (down)
-    public static final double kClimberStaticExtendedVoltage = 1.85; // Set point for Climber POT when extended
+    public static final double kClimberStaticRetractedVoltage = 3.6; // POT Voltage when climber fully retracted (down)
+    public static final double kClimberStaticExtendedVoltage = 1.3; // Set point for Climber POT when extended
     // Climber Active Motor Settings
-    public static final double kClimberActiveUpSpeed = 0.85; // PWM Speed of Climber Motor
-    public static final double kClimberActiveDownSpeed = 0.65; // PWM Speed of Climber Motor
+    public static final double kClimberActiveUpSpeed = 0.90; // PWM Speed of Climber Motor
+    public static final double kClimberActiveDownSpeed = 0.70; // PWM Speed of Climber Motor
     public static final double kClimberActiveHoldTIme = 0.0; // Seconds to engage hold routine (small amount to climber PWM)
     public static final double kClimberActiveHoldSpeed = 0.15; // PWM Speed during "hold" period
     public static final double kClimberActiveRetractedVoltage = 4.0; // POT Voltage when climber fully retracted (down)
@@ -139,7 +139,7 @@ public final class Constants {
 
     // Indexer Encoder
 
-    public static final double kIndexerSpeed = 0.80; // Speed of the Indexer Motor
+    public static final double kIndexerSpeed = 0.75; // Speed of the Indexer Motor
     public static final double kEncRevolutions = 1.0 - kIndexerSpeed / 10.0; // # of revolution
     public static final double kEncPPR = 7.0; // ENcoder pulses per revolution
     public static final double kEncGearRatio = 27.0; // kEnc*number of revolutions
