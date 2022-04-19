@@ -86,11 +86,15 @@ public final class Constants {
     public static final int XBOX_CONTROLLER_PORT = 2;
 
     // Drive Motor Related Constants
+    public static final double kDrive_P=7.5;
+    public static final double kDrive_I=0;
+    public static final double kDrive_D=0;
+    public static final int kStatus_Frame_Period = 5;
+    public static final double kWheelDiameter = 6.0;
+
     public static final double kMoveLimit = 1.0; // Maximum Move Overide Limit
     public static final double kTurnLimit = 1.0; // Maximum Turn Overide Limit
-
     public static final double kTurnScaling = 0.8; // Scale value for turns
-
     public static final double kMoveMinThreshold = 0.1;
     public static final double kTurnMinThreshold = 0.1;
     // Targeting Settings
